@@ -17,6 +17,8 @@ node_modules/
 # Temporary LLM scratch files (never committed)
 scratch.*
 .tmp/
+.planning/phases/*
+.planning/config.json
 
 # The .planning folder is part of the implementation history; ignore it for templates.
 
