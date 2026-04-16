@@ -1,0 +1,5 @@
+title: "GitHub Copilot Wiki: An AI-Powered Second Brain"
+description: "A forkable template for building LLM-maintained personal knowledge bases using GitHub Copilot."
+remote_theme: pages-themes/hacker
+plugins:
+  - jekyll-remote-theme
