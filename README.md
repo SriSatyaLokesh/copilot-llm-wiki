@@ -1,4 +1,4 @@
-# GitHub Copilot Wiki Template
+# GitHub Copilot Wiki: An AI-Powered Second Brain Template
 
 **A forkable template for building LLM-maintained personal knowledge bases using GitHub Copilot.**
 
