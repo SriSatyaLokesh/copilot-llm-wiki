@@ -9,6 +9,8 @@ This project is an implementation of the **LLM-Wiki** concept popularized by [An
 ## 🏗️ Architecture: The Three Layers
 The system is divided into three distinct layers of responsibility:
 
+![Three-Layer Architecture Continuous Ingest Loop](docs/assets/architecture-loop.jpg)
+
 1.  **Raw Sources (`raw/`)**: Your collection of source documents. These are **immutable**—the AI reads them but never modifies them.
 2.  **The Wiki (`wiki/`)**: Generating interlinked markdown files. The AI **owns** this layer—it writes it; you read it.
 3.  **The Schema (`.github/copilot-instructions.md`)**: The "brain" or configuration layer. It tells the AI how to be a disciplined wiki maintainer rather than a generic chatbot.
