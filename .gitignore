@@ -1,0 +1,51 @@
+# OS artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor artifacts
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node / tooling (if any scripts are added later)
+node_modules/
+*.log
+
+# Temporary LLM scratch files (never committed)
+scratch.*
+.tmp/
+
+# The .planning folder is part of the implementation history; ignore it for templates.
+
+# LLM Agent configurations (local state)
+.gemini/
+.claude/
+.agent/
+adapters/
+
+# Personal rule files (if any)
+PROJECT_RULES.md
+SUPERPOWER-STYLE.md
+AGENTS.md
+CLAUDE.md
+
+# --- PROTECTED REPO STRUCTURE ---
+
+# 📥 RAW DIRECTORY: Ignore all content except the structural placeholder
+raw/*
+!raw/.gitkeep
+
+# 🧠 WIKI DIRECTORY: Ignore content except the skeletal framework
+wiki/*
+!wiki/.gitkeep
+!wiki/*.md
+
+# Allow structural placeholders in subdirectories
+!wiki/comparisons/.gitkeep
+!wiki/concepts/.gitkeep
+!wiki/entities/.gitkeep
+!wiki/qa/.gitkeep
+!wiki/sources/.gitkeep
