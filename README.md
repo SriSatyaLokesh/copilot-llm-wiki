@@ -19,7 +19,15 @@ The system is divided into three distinct layers of responsibility:
 
 1.  **Fork this repository**: Click the "Fork" button to create your own copy.
 2.  **Clone and Open in VS Code**: Open the repo in an environment with GitHub Copilot installed.
-3.  **Enable Prompt Files**:
+
+### 💻 Terminal Quick Start (One-liners)
+For rapid setup, you can skip the UI and use the terminal:
+
+-   **Scaffold only** (fastest): `npx degit SriSatyaLokesh/copilot-llm-wiki#main my-wiki`
+-   **Fork and Clone** (official): `gh repo create my-wiki --template="SriSatyaLokesh/copilot-llm-wiki" --public --clone`
+
+## ⚙️ Configuration
+1.  **Enable Prompt Files**:
     - Open VS Code Settings (`Ctrl+,`).
     - Search for `github.copilot.chat.promptFiles`.
     - Set it to `true`.
