@@ -1,7 +1,7 @@
 # Product Requirements Document (PRD): Copilot LLM Wiki
 
 ## 1. Project Vision
-The **Copilot LLM Wiki** is a domain-agnostic, LLM-maintained knowledge base designed to solve the "Zero-Context" problem in AI coding. Most LLM interactions are stateless, starting from scratch each time. This project implements Andrej Karpathy's "Compounding Knowledge Pattern," where the AI acts as a **Librarian**, incrementally building a persistent, interlinked wiki from every source it encounters.
+The **Copilot LLM Wiki** is a domain-agnostic, LLM-maintained knowledge base designed to solve the "Zero-Context" problem in AI coding. Most LLM interactions are stateless, starting from scratch each time. This project implements Andrej Karpathy's **[LLM-Wiki / Compounding Knowledge Pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)**, where the AI acts as a **Librarian**, incrementally building a persistent, interlinked wiki from every source it encounters.
 
 ## 2. Core Personas
 ### The Librarian

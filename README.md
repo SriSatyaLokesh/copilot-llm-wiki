@@ -4,6 +4,8 @@
 
 Instead of starting from scratch on every query, Copilot incrementally builds and maintains a persistent, interlinked wiki of markdown files that compounds with every source ingested.
 
+This project is an implementation of the **LLM-Wiki** concept popularized by [Andrej Karpathy](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f), designed to create a "Compounding Knowledge Pattern" through purely file-based local storage.
+
 ## 🚀 10-Minute Setup Guide
 
 1.  **Fork this repository**: Click the "Fork" button to create your own copy.
@@ -54,5 +56,12 @@ copilot --agent librarian -p "ingest raw/new-data.md"
 
 The librarian agent automatically decides between direct ingestion and using the intake scripts based on the complexity of your request.
 
+## 📊 Visualization (Obsidian Recommended)
+To get the most out of your LLM Wiki, we highly recommend using **[Obsidian](https://obsidian.md/)** to view your `wiki/` directory.
+
+- **Knowledge Graph**: Use Obsidian's "Graph View" to see how your entities and concepts are interconnected.
+- **Easy Navigation**: Clickable links, back-links, and local previews make exploring your knowledge base feel like a "second brain."
+- **Markdown-Native**: Since the wiki is 100% standard markdown, Obsidian handles it natively without any conversion needed.
+
 ---
-*Built with GitHub Copilot as the AI backbone.*
+*Inspired by Andrej Karpathy's [llm-wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f). Built by the community.*

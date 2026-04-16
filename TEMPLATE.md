@@ -31,7 +31,7 @@ The script will iterate through the files and call Copilot for each one, ensurin
 ## 5. Deployment (Optional)
 
 Since the wiki is entirely markdown:
-- **Obsidian**: You can open the `wiki/` folder as an Obsidian Vault for local browsing.
+- **[Obsidian](https://obsidian.md/) (Highly Recommended)**: Open the root folder as an Obsidian Vault. Use the **Graph View** to visualize your interlinked entities and concepts as a second brain.
 - **GitHub Pages**: Use any static site generator (like MkDocs or Jekyll) to publish the `wiki/` directory as a website.
 
 ---
