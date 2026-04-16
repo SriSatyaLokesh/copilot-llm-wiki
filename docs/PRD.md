@@ -3,7 +3,14 @@
 ## 1. Project Vision
 The **Copilot LLM Wiki** is a domain-agnostic, LLM-maintained knowledge base designed to solve the "Zero-Context" problem in AI coding. Most LLM interactions are stateless, starting from scratch each time. This project implements Andrej Karpathy's **[LLM-Wiki / Compounding Knowledge Pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)**, where the AI acts as a **Librarian**, incrementally building a persistent, interlinked wiki from every source it encounters.
 
-## 2. Core Personas
+## 2. System Architecture: The Three Layers
+As defined in the core [LLM-Wiki specification](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f), the system is built on three distinct layers of interaction:
+
+1. **The Raw Sources (`raw/`)**: Your curated collection of source documents (articles, papers, URLs). These are **immutable**—the Librarian reads from them but never modifies them. This is your absolute source of truth.
+2. **The Wiki (`wiki/`)**: A directory of LLM-generated markdown files (summaries, entities, concepts, QA). The Librarian **owns** this layer entirely. It creates, updates, and interlinks these pages. You read it; the AI writes it.
+3. **The Schema (`.github/copilot-instructions.md`)**: The "brain" or configuration file that tells the Librarian how to behave. It defines the structure, conventions, and workflows. You and the Librarian **co-evolve** this schema over time as you refine your domain's needs.
+
+## 3. Core Personas
 ### The Librarian
 - **Role**: Active maintainer of the wiki.
 - **Responsibility**: Ingesting sources, updating the index/log, cross-referencing knowledge, and ensuring structural health (linting).

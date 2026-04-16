@@ -6,6 +6,13 @@ Instead of starting from scratch on every query, Copilot incrementally builds an
 
 This project is an implementation of the **LLM-Wiki** concept popularized by [Andrej Karpathy](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f), designed to create a "Compounding Knowledge Pattern" through purely file-based local storage.
 
+## 🏗️ Architecture: The Three Layers
+The system is divided into three distinct layers of responsibility:
+
+1.  **Raw Sources (`raw/`)**: Your collection of source documents. These are **immutable**—the AI reads them but never modifies them.
+2.  **The Wiki (`wiki/`)**: Generating interlinked markdown files. The AI **owns** this layer—it writes it; you read it.
+3.  **The Schema (`.github/copilot-instructions.md`)**: The "brain" or configuration layer. It tells the AI how to be a disciplined wiki maintainer rather than a generic chatbot.
+
 ## 🚀 10-Minute Setup Guide
 
 1.  **Fork this repository**: Click the "Fork" button to create your own copy.

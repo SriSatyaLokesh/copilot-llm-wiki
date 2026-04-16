@@ -32,8 +32,8 @@ The wiki is a file-system based knowledge layer using structured Markdown. It re
 
 ## 2. Implementation Specifications
 
-### 2.1 Core Schema (`copilot-instructions.md`)
-This file is the global context for all Copilot surfaces. It defines:
+### 2.1 Layer 3: The Core Schema (`copilot-instructions.md`)
+This file is the global "configuration" or "brain" for all Copilot surfaces. It defines:
 - **Trigger Phrases**: "ingest", "query", "lint".
 - **Workflow Definitions**: Detailed step-by-step instructions for each operation.
 - **Conventions**: Lowercase kebab-case filenames, mandatory `## See Also` sections.
