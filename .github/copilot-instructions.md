@@ -30,7 +30,7 @@ copilot-llm-wiki/
         └── <qa>.md         # type: Q&A concepts
 ```
 
-**raw/** holds the source material. The primary source is:
+**raw/** holds the source material in any format — plain markdown, scraped HTML converted to markdown, notes, etc. Files here are **not** OKF concepts and require no frontmatter. The primary source is:
 - [SOURCE URL OR DESCRIPTION] (e.g., https://docs.example.com)
 - [REPOSITORY OR LOCAL PATH]
 
@@ -42,7 +42,7 @@ When ingesting a URL, save its markdown content to `raw/` before processing. Nev
 
 ## OKF Frontmatter Requirements
 
-Every concept document (any `.md` file that is not `index.md` or `log.md`) MUST begin with a YAML frontmatter block:
+Every concept document (any `.md` file **in `wiki/`** that is not `index.md` or `log.md`) MUST begin with a YAML frontmatter block:
 
 ```yaml
 ---
@@ -79,7 +79,7 @@ sources:                  # Include when the concept derives from external mater
 - Never edit or delete past entries in `log.md` — append only (newest first)
 - Never write a wiki page without first reading `index.md` — check before creating
 - Never write a page that contradicts an existing page without flagging the contradiction to the user
-- Never create a concept `.md` file without OKF frontmatter
+- Never create a concept `.md` file **in `wiki/`** without OKF frontmatter (files in `raw/` are unstructured source documents and need no frontmatter)
 
 ---
 
