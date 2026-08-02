@@ -96,7 +96,7 @@ okf_version: "0.2"
 # [YOUR DOMAIN] Wiki — Index
 
 ## Overview
-* [Overview](overview.md) — Top-level orientation
+* [Overview](overview.md) - Top-level orientation
 
 ## Entities
 * [Example Entity](entities/example.md) - Description
@@ -204,7 +204,7 @@ Report findings and offer to fix them.
 
 ## Conventions
 
-- Bundle-relative links preferred: `/wiki/entities/copilot-chat.md`
+- Absolute repo-path links preferred: `/wiki/entities/copilot-chat.md` (note: `wiki/` is the bundle root, so these paths work in GitHub UI and resolve correctly across the repo)
 - Every concept page ends with a `## See Also` section
 - Filenames: lowercase kebab-case, no spaces
 - Don't editorialize — state what sources say; attribute version- or plan-specific claims

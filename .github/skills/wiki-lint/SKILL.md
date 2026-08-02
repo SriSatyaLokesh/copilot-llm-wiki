@@ -19,6 +19,7 @@ When this skill is triggered, follow the **Lint workflow** defined in `.github/c
    - Every concept `.md` (not `index.md` or `log.md`) has parseable YAML frontmatter.
    - Every frontmatter has a non-empty `type` field.
    - `generated.by` follows the actor convention (`copilot-librarian/1.0`, `human:<id>`, or `process:<id>`).
+   - `generated.at` is an ISO 8601 datetime string (e.g., `2026-08-02T13:00:00Z`), not a bare date.
    - `verified[].by` follows the same actor convention.
    - Any `stale_after` dates that have already passed are flagged.
    - Subdirectory `index.md` files exist for `entities/`, `concepts/`, `comparisons/`, `sources/`, and `qa/`.

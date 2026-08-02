@@ -5,7 +5,7 @@ okf_version: "0.2"
 # [YOUR DOMAIN] Wiki — Index
 
 ## Overview
-* [Overview](overview.md) — Top-level orientation
+* [Overview](overview.md) - Top-level orientation
 
 ## Entities
 * _No pages yet._
