@@ -1,3 +1,11 @@
+---
+type: Overview
+title: "[YOUR DOMAIN] Wiki Overview"
+description: Top-level orientation for the [YOUR DOMAIN] knowledge wiki.
+status: draft
+generated: { by: human:template, at: 2026-08-02 }
+---
+
 # What is [YOUR DOMAIN]?
 
 ## Overview
@@ -11,4 +19,4 @@
 [Briefly describe any tiers, plans, or associated ecosystems here.]
 
 ## See Also
-- [Index](wiki/index.md)
+- [Index](index.md)

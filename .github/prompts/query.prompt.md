@@ -12,4 +12,5 @@ Read the **Query workflow** in `.github/copilot-instructions.md` and execute it 
 2. If the answer is not in the wiki, say: "I couldn't find an answer in the wiki. Would you like me to ingest a new source for this?"
 3. Follow the citation format: **Pages consulted:** [page1.md], [page2.md]
 
-**Filing offer:** If the answer synthesizes content from 2 or more wiki pages, offer to file it as `wiki/qa/<slug>.md` and update `index.md` and `log.md`.
+**Filing offer:** If the answer synthesizes content from 2 or more wiki pages, offer to file it as `wiki/qa/<slug>.md` with OKF frontmatter (`type: Q&A`, `title`, `description`, `generated: { by: copilot-librarian/1.0, at: <now> }`) and update `wiki/index.md`, `wiki/qa/index.md`, and `wiki/log.md`.
+

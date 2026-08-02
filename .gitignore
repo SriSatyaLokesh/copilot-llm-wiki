@@ -47,7 +47,12 @@ wiki/*
 
 # Allow structural placeholders in subdirectories
 !wiki/comparisons/.gitkeep
+!wiki/comparisons/index.md
 !wiki/concepts/.gitkeep
+!wiki/concepts/index.md
 !wiki/entities/.gitkeep
+!wiki/entities/index.md
 !wiki/qa/.gitkeep
+!wiki/qa/index.md
 !wiki/sources/.gitkeep
+!wiki/sources/index.md
