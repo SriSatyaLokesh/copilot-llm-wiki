@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software or template in your research or project, please cite it as below."
+title: "GitHub Copilot Wiki: An AI-Powered Second Brain Template"
+abstract: "A forkable template for building LLM-maintained personal knowledge bases using GitHub Copilot, implementing Andrej Karpathy's Compounding Knowledge Pattern."
+authors:
+  - family-names: "Sri"
+    given-names: "Satya Lokesh"
+version: 1.0.0
+date-released: 2026-04-17
+license: MIT
+repository-code: "https://github.com/SriSatyaLokesh/copilot-llm-wiki"
+url: "https://github.com/SriSatyaLokesh/copilot-llm-wiki"
+keywords:
+  - "copilot-llm-wiki"
+  - "github-copilot"
+  - "llm-wiki"
+  - "second-brain"
+  - "knowledge-base"
+  - "compounding-knowledge"
+  - "andrej-karpathy"
+  - "obsidian"
+  - "generative-ai"
