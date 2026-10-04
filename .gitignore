@@ -31,8 +31,8 @@ dist/
 # Personal rule files (if any)
 PROJECT_RULES.md
 SUPERPOWER-STYLE.md
-AGENTS.md
 CLAUDE.md
+adapters/GEMINI.md
 
 # --- PROTECTED REPO STRUCTURE ---
 
