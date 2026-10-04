@@ -1,0 +1,103 @@
+# GitHub Copilot Wiki — Complete AI Context
+
+> A forkable template for building LLM-maintained personal knowledge bases using GitHub Copilot.
+> Implements Andrej Karpathy's Compounding Knowledge Pattern.
+> Repository: https://github.com/SriSatyaLokesh/copilot-llm-wiki
+> License: MIT
+
+---
+
+## 1. Executive Summary
+
+Most LLM interactions are ephemeral: once a conversation ends, context evaporates.
+The **Copilot LLM Wiki** solves this by establishing a continuous compounding knowledge loop.
+GitHub Copilot serves as an active **Librarian** maintaining a local, version-controlled markdown wiki.
+Every new source document ingested enriches existing concept and entity pages, updates an alphabetical master index, and is recorded in an append-only audit log.
+
+---
+
+## 2. The Three-Layer Architecture
+
+```
+copilot-llm-wiki/
+├── raw/                                ← LAYER 1: Raw Sources (Immutable)
+├── wiki/                               ← LAYER 2: Knowledge Base (AI Maintained)
+│   ├── index.md                        ← Master knowledge catalog (alphabetical)
+│   ├── log.md                          ← Append-only audit trail
+│   ├── overview.md                     ← Domain-level synthesis
+│   ├── entities/                       ← Concrete nouns (people, features, products)
+│   ├── concepts/                       ← Theoretical/abstract ideas & mechanics
+│   ├── comparisons/                    ← Side-by-side comparative matrices
+│   ├── sources/                        ← Summaries of ingested raw files
+│   └── qa/                             ← Reusable multi-page synthesis answers
+└── .github/copilot-instructions.md     ← LAYER 3: The Schema / Brain
+```
+
+### Layer 1: Raw Sources (`raw/`)
+- Curated source material: markdown notes, articles, web pages, documentation.
+- **Rule**: Completely immutable. The AI reads from here, extracts insights, and never mutates source files.
+
+### Layer 2: The Wiki (`wiki/`)
+- Interconnected markdown pages written in plain, linkable syntax (`[Title](wiki/entities/slug.md)`).
+- Every page ends with a mandatory `## See Also` section.
+- **Rule**: Owned entirely by GitHub Copilot. You read it; the AI writes and cross-links it.
+
+### Layer 3: The Schema (`.github/copilot-instructions.md`)
+- The system instructions and rules that turn a generic generative AI model into a disciplined librarian.
+- Defines prohibitions, workflows, indexing rules, contradiction handling, and formatting schemas.
+
+---
+
+## 3. Core Operating Workflows
+
+### Ingestion Workflow (`/ingest`)
+Trigger: "ingest <source>", `/ingest`, or intake script execution.
+1. **Source Ingestion**: Read the raw source document from `raw/`.
+2. **Extraction**: Identify key facts, definitions, entities, and concepts.
+3. **Contradiction Check**: Read any existing wiki pages touched by the new source. If contradictions exist, flag them and do not overwrite silently.
+4. **Source Summary**: Write `wiki/sources/<slug>.md` citing the source and noting key takeaways.
+5. **Entity & Concept Synthesis**: Create or update pages in `wiki/entities/` and `wiki/concepts/`.
+6. **Index Update**: Insert new entries into `wiki/index.md` keeping all sections strictly alphabetical.
+7. **Log Update**: Append a single entry to `wiki/log.md` detailing the operation timestamp and modified files.
+
+### Query Workflow (`/query`)
+Trigger: Questions about the knowledge domain.
+1. Read `wiki/index.md` first to identify relevant pages.
+2. Follow cross-links to read relevant entities, concepts, or comparisons.
+3. Formulate an answer with explicit citations to consulted wiki pages.
+4. If the synthesis is novel and reusable, offer to save it into `wiki/qa/<slug>.md`.
+
+### Lint Workflow (`/lint`)
+Trigger: "lint the wiki", `/lint`.
+1. Detect orphan pages in `wiki/` missing from `wiki/index.md`.
+2. Detect broken relative markdown links.
+3. Identify concepts or entities mentioned frequently across pages without a dedicated page.
+4. Report inconsistencies or unlinked relationships for user remediation.
+
+---
+
+## 4. Fundamental Rules & Conventions
+
+- **Append-Only Logging**: Never edit or delete historical entries in `wiki/log.md`.
+- **Index-First Operations**: Always read `wiki/index.md` before processing any query or ingest.
+- **Strict Kebab-Case**: All markdown filenames must be lowercase kebab-case (e.g. `service-mesh-architecture.md`).
+- **Markdown-Native Compatibility**: All interlinking uses standard relative markdown links, ensuring 100% native compatibility with Obsidian, GitHub Web, VS Code, and static site generators.
+
+---
+
+## 5. Terminal & CLI Quickstart
+
+Scaffold directly via NPX:
+```bash
+npx degit SriSatyaLokesh/copilot-llm-wiki#main my-wiki
+```
+
+Or clone using GitHub CLI:
+```bash
+gh repo create my-wiki --template="SriSatyaLokesh/copilot-llm-wiki" --public --clone
+```
+
+Invoke CLI Librarian Agent:
+```bash
+copilot --agent librarian -p "ingest raw/new-document.md"
+```
