@@ -1,0 +1,43 @@
+# GitHub Copilot Wiki
+
+> A forkable template for building LLM-maintained personal knowledge bases using GitHub Copilot, implementing Andrej Karpathy's Compounding Knowledge Pattern through purely file-based local storage.
+
+## Overview
+
+The Copilot LLM Wiki solves the "Zero-Context" problem of AI interactions. Instead of starting from scratch on every prompt, GitHub Copilot acts as an autonomous Librarian that continuously reads raw sources, synthesizes entities and concepts, updates an interlinked wiki, maintains an alphabetical index, and logs all operations in an append-only audit trail.
+
+- Primary Keyword: copilot llm wiki
+- Repository: https://github.com/SriSatyaLokesh/copilot-llm-wiki
+- Creator: Sri Satya Lokesh
+- License: MIT
+
+## Core Documentation
+
+- [README.md](README.md): Primary overview, 10-minute quickstart guide, terminal one-liners, Obsidian integration, and FAQs.
+- [docs/PRD.md](docs/PRD.md): Product Requirements Document defining the Three-Layer Architecture (Raw, Wiki, Schema) and Librarian persona.
+- [docs/TRD.md](docs/TRD.md): Technical Requirements Document specifying tool mapping, execution workflows, and scripts.
+- [TEMPLATE.md](TEMPLATE.md): Domain adaptation guide for customizing the wiki to specific subjects (medical, legal, codebase, research).
+- [CONTRIBUTING.md](CONTRIBUTING.md): Guide for contributing both to the template tooling and to wiki knowledge bases.
+
+## System Architecture: The Three Layers
+
+1. **The Raw Sources (`raw/`)**: Curated source documents (markdown, text, URLs). Immutable—read-only for the AI.
+2. **The Wiki (`wiki/`)**: Interlinked knowledge layer (`entities/`, `concepts/`, `comparisons/`, `qa/`). Owned and written by the AI; read by the human.
+3. **The Schema (`.github/copilot-instructions.md`)**: The repository brain. Contains the strict rules, workflows, prohibitions, and format templates that govern the Librarian.
+
+## Copilot Configuration & Workflows
+
+- [.github/copilot-instructions.md](.github/copilot-instructions.md): System prompt and behavioral rules loaded by all GitHub Copilot surfaces.
+- [.github/agents/librarian.agent.md](.github/agents/librarian.agent.md): Autonomous CLI agent persona for terminal-based batch ingestion and maintenance.
+- [.github/prompts/ingest.prompt.md](.github/prompts/ingest.prompt.md): Prompt file for ingesting single files or URLs.
+- [.github/prompts/query.prompt.md](.github/prompts/query.prompt.md): Prompt file for citation-backed querying.
+- [.github/prompts/lint.prompt.md](.github/prompts/lint.prompt.md): Prompt file for finding broken links, orphans, or knowledge gaps.
+
+## Automation Scripts
+
+- [.github/skills/wiki-ingest/scripts/intake.ps1](.github/skills/wiki-ingest/scripts/intake.ps1): PowerShell batch ingest automation.
+- [.github/skills/wiki-ingest/scripts/intake.sh](.github/skills/wiki-ingest/scripts/intake.sh): Bash batch ingest automation.
+
+## Full Context
+
+- [llms-full.txt](llms-full.txt): Complete, concatenated documentation and schemas for single-prompt context loading.
