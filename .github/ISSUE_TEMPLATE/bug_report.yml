@@ -1,0 +1,64 @@
+name: "Bug Report"
+description: "Report an issue with Copilot LLM Wiki prompts, intake scripts, or agent configurations."
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report an issue! Please provide as much detail as possible to help reproduce and resolve it.
+  - type: dropdown
+    id: environment
+    attributes:
+      label: "Execution Surface"
+      description: "Where did the issue occur?"
+      options:
+        - "VS Code (Copilot Chat / Prompt Files)"
+        - "GitHub Copilot CLI (Librarian Agent)"
+        - "Intake Script (PowerShell)"
+        - "Intake Script (Bash)"
+        - "JetBrains / Other IDE"
+        - "Obsidian Vault Preview"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Describe the Bug"
+      description: "A clear and concise description of what happened."
+      placeholder: "When running /ingest on a markdown document, the Librarian agent did not update index.md..."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: "Steps to Reproduce"
+      description: "Exact steps to reproduce the behavior."
+      placeholder: |
+        1. Place file in 'raw/sample.md'
+        2. In VS Code Chat, run '/ingest raw/sample.md'
+        3. See error...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected Behavior"
+      description: "What did you expect to happen instead?"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Relevant Logs or Screenshots"
+      description: "Paste terminal output, Copilot Chat response, or attach screenshots."
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: "Checklist"
+      options:
+        - label: "I have verified that the issue is reproducible with the latest version of this repository."
+          required: true
+        - label: "I have read the CONTRIBUTING.md guide."
+          required: false

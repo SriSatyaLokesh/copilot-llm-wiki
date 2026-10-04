@@ -26,7 +26,7 @@ scratch.*
 .gemini/
 .claude/
 .agent/
-adapters/
+dist/
 
 # Personal rule files (if any)
 PROJECT_RULES.md

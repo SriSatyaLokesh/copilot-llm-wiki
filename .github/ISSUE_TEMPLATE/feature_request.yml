@@ -1,0 +1,41 @@
+name: "Feature Request"
+description: "Suggest an idea or enhancement for prompts, workflows, scripts, or adapters."
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting an enhancement to the Copilot LLM Wiki template!
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Problem or Opportunity"
+      description: "Is your feature request related to a problem or a gap in the current workflow?"
+      placeholder: "Currently, ingesting multi-page PDFs or web sitemaps requires manual conversion..."
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: "Proposed Solution"
+      description: "Describe the solution or new workflow you would like to see implemented."
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternatives Considered"
+      description: "Any alternative solutions, tools, or workarounds you have considered."
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Category"
+      options:
+        - "Prompt File (.github/prompts/)"
+        - "CLI Librarian Agent (.github/agents/)"
+        - "Intake Automation Script"
+        - "IDE / Tool Adapter (Obsidian, Cursor, Claude Code, etc.)"
+        - "Documentation / Examples"
+    validations:
+      required: true

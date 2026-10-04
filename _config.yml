@@ -1,5 +1,27 @@
-title: "GitHub Copilot Wiki: An AI-Powered Second Brain"
-description: "A forkable template for building LLM-maintained personal knowledge bases using GitHub Copilot."
+title: "GitHub Copilot Wiki: An AI-Powered Second Brain Template"
+description: "A forkable template for building LLM-maintained personal knowledge bases using GitHub Copilot, implementing Andrej Karpathy's Compounding Knowledge Pattern."
+url: "https://srisatyalokesh.github.io"
+baseurl: "/copilot-llm-wiki"
+author: "Sri Satya Lokesh"
 remote_theme: pages-themes/hacker
 plugins:
   - jekyll-remote-theme
+
+# SEO & Generative Optimization Metadata
+keywords:
+  - "copilot llm wiki"
+  - "github copilot wiki"
+  - "llm wiki"
+  - "second brain template"
+  - "andrej karpathy"
+  - "compounding knowledge pattern"
+  - "obsidian knowledge base"
+  - "ai second brain"
+  - "copilot librarian"
+
+# OpenGraph & Social Sharing
+image: "docs/assets/architecture-loop.jpg"
+logo: "docs/assets/architecture-loop.jpg"
+github_username: "SriSatyaLokesh"
+repository: "SriSatyaLokesh/copilot-llm-wiki"
+license: "MIT"

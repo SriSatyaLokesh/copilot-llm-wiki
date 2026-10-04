@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "Ask a Question / General Discussions"
+    url: "https://github.com/SriSatyaLokesh/copilot-llm-wiki/discussions"
+    about: "Ask questions, share your custom wiki domains, and showcase what you've built."
+  - name: "Karpathy's LLM-Wiki Gist"
+    url: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
+    about: "Read the foundational concept behind compounding knowledge."
