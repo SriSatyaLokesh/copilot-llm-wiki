@@ -32,6 +32,7 @@ This project is an implementation of the **LLM-Wiki** concept popularized by [An
 - [🛠️ Customization](#️-customization)
 - [🤖 Librarian Agent (CLI)](#-librarian-agent-cli)
 - [📊 Visualization (Obsidian Recommended)](#-visualization-obsidian-recommended)
+- [🔌 Adapters & Interoperability (OKF v0.2)](#-adapters--interoperability-okf-v02)
 - [❓ Frequently Asked Questions (FAQ)](#-frequently-asked-questions-faq)
 - [🤝 Contributing & Community](#-contributing--community)
 - [📜 Citation & License](#-citation--license)
@@ -133,6 +134,18 @@ To get the most out of your LLM Wiki, we highly recommend using **[Obsidian](htt
 
 ---
 
+## 🔌 Adapters & Interoperability (OKF v0.2)
+
+For enterprise AI systems, Google Cloud agents, or external multi-agent orchestrators that require standardized machine-readable bundles, this repository includes an official **Open Knowledge Format (OKF v0.2)** adapter in [`adapters/okf/`](adapters/okf/):
+
+- **Clean Core Architecture**: The base wiki remains pure, distraction-free Markdown for rapid desktop note-taking and clean Obsidian viewing.
+- **Export to OKF v0.2**: Run `python adapters/okf/export.py` to compile your wiki into a fully compliant OKF v0.2 bundle in `dist/okf/` (complete with YAML frontmatter, actor conventions, ISO timestamps, and progressive disclosure sub-indexes).
+- **Native OKF Prompt**: For agents that prefer authoring notes with OKF frontmatter during chat, see [`adapters/okf/copilot-instructions.okf.md`](adapters/okf/copilot-instructions.okf.md).
+
+*Original OKF v0.2 implementation contributed by [@aayush-t-gilead](https://github.com/aayush-t-gilead).*
+
+---
+
 ## ❓ Frequently Asked Questions (FAQ)
 
 ### What is a Copilot LLM Wiki and how does it work?
@@ -149,6 +162,9 @@ The template works wherever GitHub Copilot Chat and Prompt Files are supported, 
 
 ### How does the system prevent contradictions and hallucinations?
 The core schema mandates an **Index-First** and **Contradiction-Check** rule. Before the AI writes any new page, it reads `wiki/index.md` and related entity files. If a new source contradicts an existing claim, the Librarian flags the discrepancy for resolution rather than overwriting silently.
+
+### Does this support Open Knowledge Format (OKF v0.2)?
+Yes. While the default wiki remains clean Markdown for human readability, you can export your entire knowledge base into an OKF v0.2 conformant bundle anytime using `python adapters/okf/export.py`.
 
 ### Is my personal knowledge base private?
 Yes. All files are stored locally in your workspace. You retain complete ownership and control. You can keep your repository private on GitHub or host it publicly as an open-source resource.

@@ -1,6 +1,6 @@
 # Contributing to Copilot LLM Wiki
 
-Thank you for your interest in contributing to **Copilot LLM Wiki**! Whether you are improving the template architecture, creating new prompt files, fixing automation scripts, or adding documentation, your contributions are welcome.
+Thank you for your interest in contributing to **Copilot LLM Wiki**! Whether you are improving the template architecture, creating new prompt files, fixing automation scripts, adding adapters, or expanding documentation, your contributions are welcome.
 
 ---
 
@@ -18,6 +18,7 @@ There are two primary categories of contributions:
    - Enhancing prompt files in `.github/prompts/`
    - Improving the Librarian CLI agent in `.github/agents/librarian.agent.md`
    - Enhancing intake automation scripts in `.github/skills/wiki-ingest/scripts/`
+   - Adding and refining adapters in `adapters/` (e.g., `adapters/okf/` for Open Knowledge Format v0.2 bundle export)
    - Adding integrations (Obsidian, Logseq, Cursor, JetBrains)
    - Enhancing documentation and guides
 
@@ -43,6 +44,7 @@ There are two primary categories of contributions:
 4. **Make and test your changes**:
    - Test prompt files in VS Code with GitHub Copilot Chat.
    - Test batch scripts with both PowerShell (`intake.ps1`) and Bash (`intake.sh`).
+   - If modifying adapters, verify export scripts (e.g. `python adapters/okf/export.py`).
    - Ensure you do not break existing SEO keywords (e.g. `copilot llm wiki`, `compounding knowledge pattern`).
 5. **Commit with conventional commit messages**:
    ```bash
