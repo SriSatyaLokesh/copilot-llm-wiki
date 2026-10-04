@@ -1,0 +1,75 @@
+<!-- Schema.org Structured Data for SEO & Generative Discovery -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "GitHub Copilot Wiki: An AI-Powered Second Brain Template",
+      "alternateName": "Copilot LLM Wiki",
+      "description": "A forkable template for building LLM-maintained personal knowledge bases using GitHub Copilot, implementing Andrej Karpathy's Compounding Knowledge Pattern.",
+      "codeRepository": "https://github.com/SriSatyaLokesh/copilot-llm-wiki",
+      "programmingLanguage": "Markdown",
+      "author": {
+        "@type": "Person",
+        "name": "Sri Satya Lokesh"
+      },
+      "license": "https://opensource.org/licenses/MIT",
+      "keywords": [
+        "copilot llm wiki",
+        "github copilot wiki",
+        "llm wiki",
+        "second brain template",
+        "andrej karpathy",
+        "obsidian",
+        "generative ai"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a Copilot LLM Wiki and how does it work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A Copilot LLM Wiki is a persistent personal knowledge base that pairs GitHub Copilot's reasoning with local markdown storage. Rather than losing context between chats, Copilot reads raw documents, synthesizes concepts, cross-links entities, maintains an index, and preserves an audit log."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does this differ from traditional RAG?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Traditional RAG slices documents into arbitrary text chunks in vector databases. An LLM Wiki converts documents into human-readable, interlinked markdown pages that connect semantically and are fully inspectable, editable, and version-controlled."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this with Obsidian?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The wiki layer consists of standard relative markdown links, making it 100% natively compatible with Obsidian's Graph View, backlinks, and search."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which IDEs and GitHub Copilot models are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The template supports VS Code, Visual Studio, JetBrains IDEs, and GitHub Copilot CLI, with underlying models including GPT-4o, Claude Sonnet, and Gemini Pro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the system prevent contradictions and hallucinations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The core schema mandates an Index-First and Contradiction-Check rule where Copilot reads the index and existing pages before writing, flagging discrepancies rather than silently overwriting."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
