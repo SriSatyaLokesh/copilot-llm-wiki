@@ -60,6 +60,7 @@ wiki/*
 !wiki/qa/
 !wiki/sources/
 !wiki/archive/
+!wiki/meta/
 
 # Subdirectory ignore rules (only track structural placeholders & sub-indexes)
 wiki/comparisons/*
@@ -88,3 +89,7 @@ wiki/archive/*
 !wiki/archive/index.md
 wiki/archive/*/*
 !wiki/archive/*/.gitkeep
+
+wiki/meta/*
+!wiki/meta/.gitkeep
+!wiki/meta/snapshots.md

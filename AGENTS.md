@@ -97,7 +97,7 @@ Append-only. Never edit past entries.
 
 Format: `## [YYYY-MM-DD] operation | description`
 
-Operations: `init` `ingest` `query` `lint`
+Operations: `init` `ingest` `query` `lint` `snapshot` `rollback`
 
 Example:
 ```
@@ -109,6 +109,10 @@ wiki/entities/copilot-free.md, wiki/overview.md (updated). Updated index.md.
 
 ## [2026-04-10] query | What IDEs support agent mode?
 Read entities/copilot-chat.md, comparisons/ide-support.md. Filed answer as wiki/comparisons/agent-mode-ides.md.
+
+## [2026-04-10] snapshot | Created snapshot 'pre-batch' - Before automated intake
+
+## [2026-04-10] rollback | Reverted wiki/ directory to snapshot 'pre-batch'
 ```
 
 ---
@@ -156,6 +160,15 @@ Check for:
 - **Missing cross-references between related pages**
 
 Report findings and offer to fix them.
+
+---
+
+## Snapshots & Rollback
+
+For automated safety during batch ingests or experimental updates:
+- **Capture Snapshot**: `python scripts/snapshot.py <name> [description]` (or `.\scripts\snapshot.ps1 <name>`)
+- **Semantic Rollback**: `python scripts/rollback.py <name>` (or `.\scripts\rollback.ps1 <name>`)
+- Snapshots are tracked in `wiki/meta/snapshots.md` and Git tags (`snapshot-<name>`).
 
 ---
 
