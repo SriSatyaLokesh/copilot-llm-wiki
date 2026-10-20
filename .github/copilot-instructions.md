@@ -88,7 +88,7 @@ Append-only. Never edit past entries.
 
 Format: `## [YYYY-MM-DD] operation | description`
 
-Operations: `init` `ingest` `query` `lint` `snapshot` `rollback`
+Operations: `init` `ingest` `query` `lint` `snapshot` `rollback` `reingest`
 
 Example:
 ```
@@ -126,6 +126,26 @@ Triggered by: "ingest X", "add X to the wiki", "process this", "add this source"
 8. **Cleanup**: You MUST delete the source file from `raw/` after successfully updating the log and index. **Requirement**: Use the `execute` tool with a terminal command (like `rm` or `Remove-Item`) to perform the deletion; do NOT use standard file-editing tools for this step.
 
 Discuss takeaways with the user before writing. Prefer ingesting one source at a time.
+
+---
+
+## Reingest workflow
+
+Triggered by: "reingest X", "update X in the wiki", "refresh X"
+
+1. **Check Previous History**: Verify `wiki/log.md` and `wiki/sources/<slug>.md`.
+2. **Archive Prior Source**: Run `python scripts/reingest.py <slug>` or archive previous source to `raw/archive/<slug>-<timestamp>.md`.
+3. **3-Way Delta Evaluation**: Compare previous source vs. new source against existing wiki pages.
+4. **Reference-Counted Attribution**:
+   - If a fact is removed from this source but still cited by another source: retain the fact and update citation.
+   - If a fact has no remaining backing sources: move to `### Deprecated / Historical Claims` rather than silently deleting it.
+5. **Update Source Metadata**: Update `Last Verified` date in `wiki/sources/<slug>.md`.
+6. **Rebuild Indexes**: Run `python scripts/build-index.py`.
+7. **Append to log.md**:
+   ```markdown
+   ## [YYYY-MM-DD] reingest | <Source Title>
+   Updated wiki/entities/<slug>.md. Superseded prior claims. Archived raw/archive/<slug>-<timestamp>.md.
+   ```
 
 ---
 
@@ -216,6 +236,6 @@ In `## Key Facts`, attribute assertions to sources and verification dates:
 | entity | ## Overview, ## Key Facts (with provenance), ## Relationships (optional), ## See Also |
 | concept | ## Definition, ## How It Works, ## Relationships (optional), ## See Also |
 | comparison | ## Summary Table, ## See Also |
-| source | ## Key Takeaways, ## Pages Created/Updated, ## See Also |
+| source | ## Source Metadata (with Volatility), ## Key Takeaways, ## Pages Created/Updated, ## See Also |
 | qa | ## Question, ## Answer, ## Pages Consulted, ## See Also |
 | overview | ## What Is [YOUR DOMAIN]?, ## [CORE CATEGORY 1], ## [CORE CATEGORY 2], ## See Also |

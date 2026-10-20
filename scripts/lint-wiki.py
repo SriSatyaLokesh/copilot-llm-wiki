@@ -9,7 +9,8 @@ Validates:
 3. Broken links across all wiki markdown files
 4. Archive link violations (active pages linking directly to wiki/archive/)
 5. Claim provenance in Key Facts sections
-6. Missing 'See Also' sections
+6. Source freshness and Volatility Classes (high: 30d, medium: 90d, low: 365d)
+7. Missing 'See Also' sections
 
 Usage:
     python scripts/lint-wiki.py [--strict]
@@ -19,6 +20,7 @@ import sys
 import re
 import argparse
 import subprocess
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
@@ -32,6 +34,7 @@ if sys.platform == "win32":
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 WIKI_DIR = REPO_ROOT / "wiki"
+SOURCES_DIR = WIKI_DIR / "sources"
 
 VALID_RELATIONSHIP_TYPES = {
     "depends-on",
@@ -40,6 +43,12 @@ VALID_RELATIONSHIP_TYPES = {
     "supersedes",
     "contradicts",
     "related-to",
+}
+
+VOLATILITY_CYCLES = {
+    "high": 30,    # APIs, schemas, pricing tables
+    "medium": 90,  # Architecture specs, system overviews
+    "low": 365,    # Invariant math, RFCs, foundational principles
 }
 
 EXCLUDED_FILENAMES = {"index.md", "README.md", ".gitkeep", "log.md", "overview.md"}
@@ -70,9 +79,51 @@ def resolve_markdown_link(source_file: Path, target_href: str) -> bool:
     return False
 
 
+def check_source_freshness(source_file: Path, today: datetime) -> Tuple[str, str]:
+    """
+    Parses a source file for Last Verified / Ingested date and Volatility.
+    Returns (status, message) where status is 'current', 'aging', or 'stale'.
+    """
+    content = source_file.read_text(encoding="utf-8")
+    date_str = None
+    volatility = "medium"
+
+    # Match Last Verified or Ingested
+    last_verified_match = re.search(r'\*\*Last Verified\*\*:\s*(\d{4}-\d{2}-\d{2})', content)
+    if last_verified_match:
+        date_str = last_verified_match.group(1)
+    else:
+        ingested_match = re.search(r'\*\*Ingested\*\*:\s*(\d{4}-\d{2}-\d{2})', content)
+        if ingested_match:
+            date_str = ingested_match.group(1)
+
+    vol_match = re.search(r'\*\*Volatility\*\*:\s*(high|medium|low)', content, re.IGNORECASE)
+    if vol_match:
+        volatility = vol_match.group(1).lower()
+
+    if not date_str:
+        return "unknown", f"No Ingested or Last Verified date found in {source_file.name}"
+
+    try:
+        verified_date = datetime.strptime(date_str, "%Y-%m-%d")
+    except ValueError:
+        return "unknown", f"Invalid date format in {source_file.name}: {date_str}"
+
+    cycle_days = VOLATILITY_CYCLES.get(volatility, 90)
+    days_elapsed = (today - verified_date).days
+
+    if days_elapsed > cycle_days:
+        return "stale", f"🔴 Stale ({days_elapsed}d > {cycle_days}d cycle, volatility={volatility}): {source_file.name} - needs reingest"
+    elif days_elapsed > int(cycle_days * 0.75):
+        return "aging", f"🟡 Aging ({days_elapsed}d / {cycle_days}d cycle, volatility={volatility}): {source_file.name}"
+    else:
+        return "current", f"🟢 Current ({days_elapsed}d / {cycle_days}d cycle, volatility={volatility}): {source_file.name}"
+
+
 def lint_wiki(strict: bool = False) -> int:
     errors = []
     warnings = []
+    today = datetime.now()
 
     print("[*] Running deterministic wiki linter...\n")
 
@@ -85,7 +136,18 @@ def lint_wiki(strict: bool = False) -> int:
         else:
             print("  [OK] Index Synchronization: All sub-indexes and root index up-to-date")
 
-    # 2. Scan all Markdown files in canonical silos
+    # 2. Source Freshness check
+    if SOURCES_DIR.exists():
+        source_files = [f for f in SOURCES_DIR.glob("*.md") if f.name not in EXCLUDED_FILENAMES]
+        print(f"  [OK] Checking freshness for {len(source_files)} primary source documents...")
+        for sf in source_files:
+            status, msg = check_source_freshness(sf, today)
+            if status == "stale":
+                warnings.append(msg)
+            elif status == "aging":
+                warnings.append(msg)
+
+    # 3. Scan all Markdown files in canonical silos
     all_md_files = []
     for silo in CANONICAL_SILOS:
         silo_dir = WIKI_DIR / silo
