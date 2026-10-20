@@ -10,6 +10,11 @@ desktop.ini
 *.swo
 *~
 
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+
 # Node / tooling (if any scripts are added later)
 node_modules/
 *.log
@@ -39,20 +44,47 @@ adapters/GEMINI.md
 # 📥 RAW DIRECTORY: Ignore all content except the structural placeholder
 raw/*
 !raw/.gitkeep
+!raw/archive/
+raw/archive/*
+!raw/archive/.gitkeep
 
 # 🧠 WIKI DIRECTORY: Ignore content except the skeletal framework
 wiki/*
 !wiki/.gitkeep
 !wiki/*.md
 
-# Allow structural placeholders in subdirectories
+# Allow subdirectories so git can inspect their contents
+!wiki/comparisons/
+!wiki/concepts/
+!wiki/entities/
+!wiki/qa/
+!wiki/sources/
+!wiki/archive/
+
+# Subdirectory ignore rules (only track structural placeholders & sub-indexes)
+wiki/comparisons/*
 !wiki/comparisons/.gitkeep
 !wiki/comparisons/index.md
+
+wiki/concepts/*
 !wiki/concepts/.gitkeep
 !wiki/concepts/index.md
+
+wiki/entities/*
 !wiki/entities/.gitkeep
 !wiki/entities/index.md
+
+wiki/qa/*
 !wiki/qa/.gitkeep
 !wiki/qa/index.md
+
+wiki/sources/*
 !wiki/sources/.gitkeep
 !wiki/sources/index.md
+
+wiki/archive/*
+!wiki/archive/*/
+!wiki/archive/.gitkeep
+!wiki/archive/index.md
+wiki/archive/*/*
+!wiki/archive/*/.gitkeep
