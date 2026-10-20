@@ -33,6 +33,7 @@ When ingesting a URL, save its markdown content to `raw/` before processing. Nev
 - **comparisons/** — side-by-side tables
 - **sources/** — one summary page per ingested raw document
 - **qa/** — filed answers from multi-page query syntheses
+- **archive/** — deprecated, superseded, and merged knowledge documents with redirect banners
 - **overview.md** — top-level synthesis: what [YOUR DOMAIN] is, its core aspects, a map to the rest of the wiki
 
 ---
@@ -46,31 +47,38 @@ When ingesting a URL, save its markdown content to `raw/` before processing. Nev
 
 ---
 
-## index.md
+## index.md & Hierarchical Sub-Indexes
 
-The catalog of every wiki page. Updated on every ingest. The LLM reads this first when answering any query.
+The catalog of every wiki page. To prevent context window saturation as the knowledge base scales, the wiki uses **hierarchical progressive disclosure**:
 
-Format:
+- **Root Routing Index (`wiki/index.md`)**: Contains page counts and links to each silo sub-index. The LLM reads this first for query routing.
+- **Silo Sub-Indexes (`wiki/<silo>/index.md`)**: Each content directory (`entities/`, `concepts/`, `comparisons/`, `sources/`, `qa/`, `archive/`) contains its own alphabetical catalog with one-line summaries.
+- **Deterministic Compilation**: LLM agents do NOT edit index files manually. Index files are deterministically compiled by running `python scripts/build-index.py` (or `.\scripts\build-index.ps1`).
+
+Root `wiki/index.md` format:
 ```markdown
 # [YOUR DOMAIN] Wiki — Index
 
-## Entities
-- [Example Entity](wiki/entities/example.md) — Description
-
-## Concepts
-- [Example Concept](wiki/concepts/example.md) — Description
-
-## Comparisons
-- [Comparison Table](wiki/comparisons/example.md)
-
-## Sources
-- [Source Title](wiki/sources/example.md) — ingested YYYY-MM-DD
+## Silo Indexes
+- [Entities](wiki/entities/index.md) (17 pages) — Domain entities, actors, systems, and APIs
+- [Concepts](wiki/concepts/index.md) (10 pages) — Core abstractions, protocols, and workflows
+- [Comparisons](wiki/comparisons/index.md) (2 pages) — Side-by-side matrices and scenario analyses
+- [Sources](wiki/sources/index.md) (3 pages) — Summaries of ingested primary documents
+- [Q&A](wiki/qa/index.md) (0 pages) — Synthesized answers to multi-page queries
+- [Archive](wiki/archive/index.md) (0 pages) — Deprecated and superseded documents
 
 ## Overview
 - [Overview](wiki/overview.md) — Top-level orientation
 ```
 
-One line per entry. Keep each section alphabetically sorted.
+Silo `wiki/<silo>/index.md` format:
+```markdown
+# Entities Index
+
+Catalog of all domain entities, systems, services, and APIs.
+
+- [Example Entity](example.md) — One-line description of the entity...
+```
 
 ---
 
@@ -109,7 +117,7 @@ Triggered by: "ingest X", "add X to the wiki", "process this", "add this source"
 4. **Write a source summary** at `wiki/sources/<slug>.md` — key takeaways, notable details, cross-links to pages created or updated.
 5. **Create or update entity/concept pages.** A single source typically touches 5–15 pages. New pages start as stubs; fill in what the source supports. Existing pages get new sections or updated facts.
    If the source materially changes the top-level picture (new plan tier, new capability, new product area), update `wiki/overview.md` as well.
-6. **Update index.md** — add new pages, refresh stale descriptions, keep sections sorted.
+6. **Rebuild indexes** — run `python scripts/build-index.py` (or `.\scripts\build-index.ps1`) to deterministically recompile all silo sub-indexes and root `index.md`.
 7. **Append to log.md.**
 8. **Cleanup**: You MUST delete the source file from `raw/` after successfully updating the log and index. **Requirement**: Use the `execute` tool with a terminal command (like `rm` or `Remove-Item`) to perform the deletion; do NOT use standard file-editing tools for this step.
 
@@ -134,11 +142,13 @@ Triggered by: any question about Copilot
 Triggered by: "lint the wiki", "check the wiki", "find orphans"
 
 Check for:
-- Pages in `wiki/` with no entry in `index.md` (orphans)
-- Cross-links pointing to pages that don't exist
-- Concepts or entities mentioned across multiple pages but lacking their own page
-- Claims in older pages contradicted by newer sources
-- Missing cross-references between related pages
+- **Index Synchronization**: Run `python scripts/build-index.py --check` to verify all silo and root indexes are up-to-date
+- **Orphan Pages**: Identify `.md` files in `wiki/` missing from their silo index
+- **Broken Links**: Find `[Link](...)` paths that point to non-existent files
+- **Archive Violations**: Flag active pages that link directly to archived pages in `wiki/archive/` (should link to superseding active page instead)
+- **Missing Entity Pages**: Identify entities mentioned in pages that don't have their own page yet
+- **Claims in older pages contradicted by newer sources**
+- **Missing cross-references between related pages**
 
 Report findings and offer to fix them.
 

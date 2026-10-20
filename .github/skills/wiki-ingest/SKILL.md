@@ -14,7 +14,7 @@ When this skill is triggered, you will follow the **Ingest workflow** defined in
 3. **Contradiction Check**: Verify if new findings contradict existing wiki pages. Flag to the user if they do.
 4. **Source Page**: Create `wiki/sources/<slug>.md`.
 5. **Entity/Concept Updates**: Create or update pages in `wiki/entities/` and `wiki/concepts/`.
-6. **Bookkeeping**: Update `wiki/index.md` and append to `wiki/log.md`.
+6. **Bookkeeping**: Append operation to `wiki/log.md`, then run `python scripts/build-index.py` (or `.\scripts\build-index.ps1`) to deterministically regenerate all silo sub-indexes and root `wiki/index.md`.
 7. **Automated Cleanup**: Once ingestion is successful, delete the source file from `raw/`.
    - **IMPORTANT**: To avoid platform patch-tool bugs, use the `execute` tool (Terminal) to delete the file (e.g., `rm` or `Remove-Item`). Do NOT use file-edit based deletion tools.
 
