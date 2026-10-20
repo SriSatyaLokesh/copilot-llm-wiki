@@ -185,12 +185,36 @@ For automated safety during batch ingests or experimental updates:
 - Don't editorialize — state what sources say; attribute version- or plan-specific claims
 - log.md entries are never edited or deleted
 
+### Explicit Relationships (Directed Property Graph)
+
+Entities and concepts support an optional `## Relationships` section declaring directed semantic edges:
+- **depends-on**: Functional or architectural dependency
+- **implements**: Realizes a specification, concept, or interface
+- **part-of**: Hierarchical component or sub-module relation
+- **supersedes**: Replaces an older entity/concept (pairs with archiving)
+- **contradicts**: Documents an unresolved conflict or trade-off between sources
+- **related-to**: General lateral association
+
+Relationships are strictly single-direction directed edges; inverse relationships (backlinks) are computed dynamically at query/lint time by tools and Obsidian.
+
+```markdown
+## Relationships
+- **depends-on**: [Order Creation Flow](wiki/concepts/order-creation-flow.md)
+- **part-of**: [Commercial Portal](wiki/entities/commercial-portal.md)
+```
+
+### Claim Provenance Annotations
+
+In `## Key Facts`, attribute assertions to sources and verification dates:
+- **Reference Footnote**: `SubmitOrder API supports bulk orders [^1]` with `[^1]: Source: [submitorder-api](wiki/sources/submitorder-api.md), verified 2026-04-17`
+- **Parenthetical**: `SubmitOrder API supports bulk orders (Source: [submitorder-api](wiki/sources/submitorder-api.md), 2026-04-17)`
+
 ### Page formats
 
 | Type | Required sections |
 |------|-------------------|
-| entity | ## Overview, ## Key Facts, ## See Also |
-| concept | ## Definition, ## How It Works, ## See Also |
+| entity | ## Overview, ## Key Facts (with provenance), ## Relationships (optional), ## See Also |
+| concept | ## Definition, ## How It Works, ## Relationships (optional), ## See Also |
 | comparison | ## Summary Table, ## See Also |
 | source | ## Key Takeaways, ## Pages Created/Updated, ## See Also |
 | qa | ## Question, ## Answer, ## Pages Consulted, ## See Also |
