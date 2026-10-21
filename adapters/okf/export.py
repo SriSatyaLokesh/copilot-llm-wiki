@@ -6,6 +6,7 @@ Open Knowledge Format (OKF) v0.2 bundle in dist/okf/
 """
 
 import os
+import json
 import re
 import shutil
 from datetime import datetime, timezone
@@ -91,8 +92,8 @@ def export_okf_bundle():
                 fm_block = [
                     "---",
                     f"type: {page_fm['type']}",
-                    f"title: \"{page_fm['title']}\"",
-                    f"description: \"{page_fm['description']}\"",
+                    f"title: {json.dumps(page_fm['title'])}",
+                    f"description: {json.dumps(page_fm['description'])}",
                     f"status: {page_fm['status']}",
                     f"generated: {{ by: copilot-librarian/1.0, at: {now_iso} }}",
                     "---",
@@ -127,8 +128,8 @@ def export_okf_bundle():
         overview_content = (
             f"---\n"
             f"type: Overview\n"
-            f"title: \"{title}\"\n"
-            f"description: \"{desc}\"\n"
+            f"title: {json.dumps(title)}\n"
+            f"description: {json.dumps(desc)}\n"
             f"status: stable\n"
             f"generated: {{ by: copilot-librarian/1.0, at: {now_iso} }}\n"
             f"---\n\n"
