@@ -1,0 +1,19 @@
+---
+description: Knowledge engine and wiki maintenance rules for Cursor
+globs: wiki/**/*, raw/**/*
+---
+
+# Cursor Rule: GitHub Copilot LLM Wiki
+
+Governed by authoritative specifications in `.github/copilot-instructions.md` and `AGENTS.md`.
+
+## Critical Directives
+- **Zero-Waste Query Routing**: Check `wiki/semantic-index.json` or `wiki/index.md` first before loading arbitrary markdown files into context.
+- **Graph Traversal**: Inspect `wiki/graph.json` for typed entity relationships (`depends-on`, `implements`, `part-of`).
+- **Deterministic Compilation**: Run `python scripts/build-index.py` to update indexes and semantic catalogs after modifying wiki content.
+- **Quality Linting**: Run `python scripts/lint-wiki.py --strict` before submitting changes.
+
+## Prohibitions
+- Never modify or delete files in `raw/`.
+- Never edit past entries in `wiki/log.md`.
+- Never write a wiki page without first checking `wiki/semantic-index.json` or `wiki/index.md`.

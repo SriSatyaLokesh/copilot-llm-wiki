@@ -168,6 +168,15 @@ def lint_wiki(strict: bool = False) -> int:
         else:
             print("  [OK] Semantic Index: wiki/semantic-index.json is up-to-date")
 
+    # 1c. Multi-LLM Instruction Adapters check
+    sync_adapters_script = REPO_ROOT / "scripts" / "sync-adapters.py"
+    if sync_adapters_script.exists():
+        res = subprocess.run([sys.executable, str(sync_adapters_script), "--check"], capture_output=True, text=True)
+        if res.returncode != 0:
+            errors.append(f"Instruction Adapters: LLM instructions are out of sync.\n{res.stdout.strip()}")
+        else:
+            print("  [OK] Instruction Adapters: All multi-LLM instructions up-to-date")
+
     # 2. Source Freshness check
     if SOURCES_DIR.exists():
         source_files = [f for f in SOURCES_DIR.glob("*.md") if f.name not in EXCLUDED_FILENAMES]

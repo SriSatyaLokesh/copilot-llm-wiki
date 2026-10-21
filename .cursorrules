@@ -1,0 +1,20 @@
+# Cursor IDE Agent Instructions — GitHub Copilot LLM Wiki
+
+Authoritative Schema: .github/copilot-instructions.md and AGENTS.md
+
+## Cursor Agent Guidelines
+- Before answering questions or editing files, consult @wiki/semantic-index.json or @wiki/index.md.
+- For entity relationships, inspect @wiki/graph.json.
+- Always run `python scripts/build-index.py` after editing or adding wiki documents.
+- Always run `python scripts/lint-wiki.py --strict` to verify link and schema integrity.
+
+## Prohibitions
+- Never modify or delete files in raw/
+- Never edit or delete past entries in wiki/log.md
+- Never write a page without checking wiki/index.md and wiki/semantic-index.json first
+- Never contradict an existing page without explicitly highlighting the conflict
+
+## Workflows
+- Ingest: Save to raw/<slug>.md -> summarize in wiki/sources/<slug>.md -> update entities/concepts -> run build-index.py -> append wiki/log.md
+- Query: Check wiki/semantic-index.json -> read candidate notes -> cite sources
+- Lint: Run python scripts/lint-wiki.py --strict
