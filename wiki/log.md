@@ -26,3 +26,9 @@ Implemented deterministic instruction adapter synchronizer (`scripts/sync-adapte
 Configured dedicated environment adapters for Claude Code (`CLAUDE.md`), Google Antigravity & Gemini
 (`.gemini/GEMINI.md`), and Cursor IDE (`.cursorrules`, `.cursor/rules/wiki.mdc`).
 Integrated adapter validation and drift detection into `scripts/lint-wiki.py`.
+
+## [2026-10-21] init | Pluggable source adapter architecture established
+Implemented modular source intake framework in `adapters/` supporting Web URLs (`adapters/url_adapter.py`),
+PDF documents (`adapters/pdf_adapter.py`), tabular CSVs (`adapters/csv_adapter.py`), and GitHub issues
+(`adapters/github_issues_adapter.py`). Created CLI router (`scripts/intake.py`) automatically normalizing
+multi-format sources into immutable `raw/<slug>.md` files. Updated ingest workflows in core instructions.

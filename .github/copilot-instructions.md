@@ -117,7 +117,7 @@ Triggered by: "ingest X", "add X to the wiki", "process this", "add this source"
 1. **Source Retrieval**: 
    - If a source is provided (URL or path), use it. 
    - If no source is provided, scan the `raw/` directory for any new markdown files (excluding `.gitkeep`).
-   - If the source is a URL, save the content to `raw/<slug>.md` first.
+   - For URLs or multi-format inputs (PDF, CSV, GitHub issues), run `python scripts/intake.py <source>` to normalize content into `raw/<slug>.md`.
 2. **State key takeaways** before writing anything: important facts, new entities/concepts to create, existing pages to update.
 3. **Contradiction check.** Read any existing pages the source touches. If a claim contradicts an existing page, flag it to the user and do not write until resolved.
 4. **Write a source summary** at `wiki/sources/<slug>.md` — key takeaways, notable details, cross-links to pages created or updated.
@@ -125,7 +125,7 @@ Triggered by: "ingest X", "add X to the wiki", "process this", "add this source"
    If the source materially changes the top-level picture (new plan tier, new capability, new product area), update `wiki/overview.md` as well.
 6. **Rebuild indexes** — run `python scripts/build-index.py` (or `.\scripts\build-index.ps1`) to deterministically recompile all silo sub-indexes and root `index.md`.
 7. **Append to log.md.**
-8. **Cleanup**: You MUST delete the source file from `raw/` after successfully updating the log and index. **Requirement**: Use the `execute` tool with a terminal command (like `rm` or `Remove-Item`) to perform the deletion; do NOT use standard file-editing tools for this step.
+8. **Preservation**: Retain the source file in `raw/` as an immutable source document to enable delta-based reingest and claim provenance verification.
 
 Discuss takeaways with the user before writing. Prefer ingesting one source at a time.
 
