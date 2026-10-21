@@ -1,6 +1,7 @@
 # GitHub Copilot Wiki Intake Script (PowerShell)
 # Purpose: Programmatic or batch ingestion of sources into the wiki.
-# Behavior: Processes files and clears raw/ directory upon completion.
+# Security Hardened: Validates paths against shell injection, removes --allow-all-tools,
+# and enforces raw/ source immutability for delta reingest and claim provenance (Issues #6, #8).
 
 param (
     [string]$Source
@@ -14,20 +15,25 @@ $RawDir = "raw"
 
 function Ingest-Source {
     param([string]$Path)
+    # Security: Validate filename against command injection metacharacters
+    if ($Path -notmatch '^[a-zA-Z0-9_\-\.\/\\:]+\.md$') {
+        Write-Error "Security Error: Path '$Path' contains disallowed characters."
+        return
+    }
+
     Write-Host "🚀 Ingesting: $Path" -ForegroundColor Cyan
-    # Run copilot command
-    copilot -p "ingest $Path" --allow-all-tools
+    # Principle of least privilege: do NOT pass unrestricted --allow-all-tools
+    & copilot -p ("ingest " + $Path)
 }
 
 function Cleanup-Raw {
-    Write-Host "🧹 Cleaning up raw/ directory..." -ForegroundColor Gray
-    Get-ChildItem -Path $RawDir -Filter *.md | Where-Object { $_.Name -ne ".gitkeep" } | Remove-Item -Force
+    # Invariant: raw/ documents are immutable source references required for delta reingest.
+    Write-Host "🛡️  Preserving raw/ sources for delta provenance." -ForegroundColor Gray
 }
 
 # 1. Single source mode
 if ($Source) {
     Ingest-Source -Path $Source
-    # Individual cleanup is handled by the calling agent if needed.
     exit 0
 }
 
@@ -39,7 +45,12 @@ if (-not (Test-Path $RawDir)) {
     exit 1
 }
 
-$sources = Get-ChildItem -Path $RawDir -Filter *.md | Where-Object { $_.Name -ne ".gitkeep" }
+$canonicalRaw = (Resolve-Path -Path $RawDir).Path
+
+# Safe enumeration rejecting symlinks
+$sources = Get-ChildItem -Path $RawDir -Filter *.md | Where-Object { 
+    $_.Name -ne ".gitkeep" -and $_.LinkType -eq $null 
+}
 
 $processedCount = 0
 $skippedCount = 0
@@ -50,6 +61,12 @@ if (-not $sources) {
 }
 
 foreach ($file in $sources) {
+    $resolvedFile = (Resolve-Path -Path $file.FullName).Path
+    if (-not $resolvedFile.StartsWith($canonicalRaw)) {
+        Write-Warning "Skipping out-of-bounds candidate: $resolvedFile"
+        continue
+    }
+
     $slug = $file.Name
     
     # Check if the slug already exists in the log.md file

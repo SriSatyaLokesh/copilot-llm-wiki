@@ -1,7 +1,8 @@
 #!/bin/bash
 # GitHub Copilot Wiki Intake Script (Bash)
 # Purpose: Programmatic or batch ingestion of sources into the wiki.
-# Behavior: Processes files and clears raw/ directory upon completion.
+# Security Hardened: Validates paths against shell injection, removes --allow-all-tools,
+# and enforces raw/ source immutability for delta reingest and claim provenance (Issues #6, #8).
 
 set -e
 
@@ -11,28 +12,31 @@ RAW_DIR="raw"
 
 ingest_source() {
     local source=$1
+    if [[ ! "$source" =~ ^[a-zA-Z0-9_./-]+\.md$ ]]; then
+        echo "Security Error: Source '$source' contains invalid characters." >&2
+        return 1
+    fi
     echo "🚀 Ingesting: $source"
-    copilot -p "ingest $source" --allow-all-tools
+    # Principle of least privilege: do NOT pass unrestricted --allow-all-tools
+    copilot -p "ingest $source"
 }
 
 cleanup_raw() {
-    echo "🧹 Cleaning up raw/ directory..."
-    find "$RAW_DIR" -maxdepth 1 -name "*.md" -not -name ".gitkeep" -delete
+    # Invariant: raw/ documents are immutable source references required for delta reingest.
+    echo "🛡️  Preserving raw/ sources for delta provenance."
 }
 
 # 1. Single source mode
 if [ ! -z "$1" ]; then
     ingest_source "$1"
-    # Individual cleanup is handled by the calling agent if needed, 
-    # but for script safety we only bulk-clean in batch mode.
     exit 0
 fi
 
 # 2. Batch mode
 echo "📂 Scanning $RAW_DIR for unprocessed sources..."
 
-# Find all markdown files in raw/ excluding .gitkeep
-sources=$(find "$RAW_DIR" -maxdepth 1 -name "*.md" -not -name ".gitkeep")
+# Find all regular markdown files in raw/ excluding .gitkeep (rejecting symlinks)
+sources=$(find "$RAW_DIR" -maxdepth 1 -type f -name "*.md" -not -name ".gitkeep")
 
 processed_count=0
 skipped_count=0
@@ -42,8 +46,18 @@ if [ -z "$sources" ]; then
     exit 0
 fi
 
+canonical_raw=$(realpath "$RAW_DIR" 2>/dev/null || pwd -P)
+
 for source in $sources; do
-    # Extract filename or slug to check in log.md
+    resolved_file=$(realpath "$source" 2>/dev/null || echo "$source")
+    case "$resolved_file" in
+        "$canonical_raw"/*) ;;
+        *)
+            echo "Skipping out-of-bounds candidate: $resolved_file" >&2
+            continue
+            ;;
+    esac
+
     slug=$(basename "$source")
     
     # Check if the slug already exists in the log.md file

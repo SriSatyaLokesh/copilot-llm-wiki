@@ -32,3 +32,9 @@ Implemented modular source intake framework in `adapters/` supporting Web URLs (
 PDF documents (`adapters/pdf_adapter.py`), tabular CSVs (`adapters/csv_adapter.py`), and GitHub issues
 (`adapters/github_issues_adapter.py`). Created CLI router (`scripts/intake.py`) automatically normalizing
 multi-format sources into immutable `raw/<slug>.md` files. Updated ingest workflows in core instructions.
+
+## [2026-10-21] lint | Hardened ingestion security and closed resolved vulnerabilities
+Patched YAML frontmatter scalar escaping in OKF exporter (`adapters/okf/export.py`).
+Hardened intake scripts against command injection and removed unrestricted `--allow-all-tools` execution.
+Enforced raw/ directory bounds checking, rejected symlinks, and eliminated destructive cleanup mandates.
+Implemented passive data fencing (`<untrusted_source_content>`) across prompt instructions (Issues #6, #7, #8, #9).
