@@ -1,0 +1,1177 @@
+{
+  "metadata": {
+    "generated_at": "2026-10-21T05:06:08Z",
+    "node_count": 32,
+    "edge_count": 174,
+    "silos": [
+      "archive",
+      "comparisons",
+      "concepts",
+      "entities",
+      "qa",
+      "sources"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "account-level-changes",
+      "title": "Account Level Changes",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "Account Level Changes are Global Change Orders that update customer account metadata without affecting services or provisioning. These changes do not trigger service disruptions or pricing modifications.",
+      "path": "wiki/entities/account-level-changes.md"
+    },
+    {
+      "id": "business-backend",
+      "title": "Business Backend",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "Business Backend is the API layer that receives requests from the Commercial Portal and routes them to Order MS for processing. It acts as the intermediary between the customer-facing portal and the order orchestration microservices.",
+      "path": "wiki/entities/business-backend.md"
+    },
+    {
+      "id": "change-order-categories",
+      "title": "Change Order Categories",
+      "silo": "concepts",
+      "type": "concept",
+      "tags": [],
+      "summary": "Global Change Orders are categorized into three distinct types based on scope and impact: Account Level Changes, Static IP Changes, and Service Level Changes. This categorization determines validation rules, pricing impact, and required approvals.",
+      "path": "wiki/concepts/change-order-categories.md"
+    },
+    {
+      "id": "cidr-block-allocation",
+      "title": "CIDR Block Allocation",
+      "silo": "concepts",
+      "type": "concept",
+      "tags": [],
+      "summary": "CIDR Block Allocation is the fundamental networking model used to assign static IP addresses to BFI and BF Pro customers. CIDR (Classless Inter-Domain Routing) blocks define contiguous ranges of IP addresses reserved for a specific service, with some addresses reserved for net...",
+      "path": "wiki/concepts/cidr-block-allocation.md"
+    },
+    {
+      "id": "commercial-portal",
+      "title": "Commercial Portal",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "Commercial Portal is the web-based user interface where customers initiate order placement and manage their commercial services. It serves as the entry point for the SubmitOrder API workflow.",
+      "path": "wiki/entities/commercial-portal.md"
+    },
+    {
+      "id": "cxpbu-cadms",
+      "title": "CXPBU CADMS",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "CXPBU CADMS (Customer Account Data Management System) is a microservice responsible for managing and persisting customer account data. It serves as a data intermediary between the Portal Backend and Dynamics, ensuring data consistency and providing access to customer account i...",
+      "path": "wiki/entities/cxpbu-cadms.md"
+    },
+    {
+      "id": "cxpbu-catalog-db",
+      "title": "CXPBU Catalog DB",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "CXPBU Catalog DB is the centralized product catalog and rate card pricing database for the Business Portal. It maintains the authoritative source of truth for all service offerings, product configurations, and pricing information used throughout the order orchestration and Glo...",
+      "path": "wiki/entities/cxpbu-catalog-db.md"
+    },
+    {
+      "id": "cxpbu-customerms",
+      "title": "CXPBU CustomerMS",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "CXPBU CustomerMS is a microservice responsible for managing customer account APIs. It provides access to customer account information and serves as part of the middleware layer between the Portal and backend data systems.",
+      "path": "wiki/entities/cxpbu-customerms.md"
+    },
+    {
+      "id": "cxpbu-orderms",
+      "title": "CXPBU OrderMS",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "CXPBU OrderMS is a critical microservice within the CXPBU platform responsible for order orchestration, pricing evaluation, and financial calculations. It serves as the middleware between the Portal and Dynamics, handling validation, rate card comparison, and Early Termination...",
+      "path": "wiki/entities/cxpbu-orderms.md"
+    },
+    {
+      "id": "dynamics",
+      "title": "Dynamics",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "Dynamics is the order orchestration system of record for the Business Portal. It maintains authoritative customer account data, service contracts, and executes orchestration for Global Change Orders. Dynamics is the central authority for account, contact, and billing address i...",
+      "path": "wiki/entities/dynamics.md"
+    },
+    {
+      "id": "etf-calculation",
+      "title": "ETF Calculation",
+      "silo": "concepts",
+      "type": "concept",
+      "tags": [],
+      "summary": "Early Termination Fee (ETF) Calculation is the process of computing the financial penalty when a customer requests to disconnect a service while still under contract. CXPBU OrderMS calculates the ETF based on contract dates, service pricing, and remaining term.",
+      "path": "wiki/concepts/etf-calculation.md"
+    },
+    {
+      "id": "gco-lifecycle",
+      "title": "GCO Lifecycle",
+      "silo": "concepts",
+      "type": "concept",
+      "tags": [],
+      "summary": "The Global Change Order (GCO) Lifecycle is a 7-state workflow that governs the processing of all customer-initiated account and service modifications through the Business Portal. Each state represents a distinct phase of validation, evaluation, and execution.",
+      "path": "wiki/concepts/gco-lifecycle.md"
+    },
+    {
+      "id": "global-change-order",
+      "title": "Global Change Order",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "Global Change Orders (GCO) are a core feature of the Business Portal that enable customers to modify their account information, service configurations, contacts, and IP assignments through the customer portal interface. Any modification initiated on an active account or servic...",
+      "path": "wiki/entities/global-change-order.md"
+    },
+    {
+      "id": "global-change-orders",
+      "title": "Global Change Orders - Engineering Architecture & Technical Documentation",
+      "silo": "sources",
+      "type": "source",
+      "tags": [],
+      "summary": "",
+      "path": "wiki/sources/global-change-orders.md"
+    },
+    {
+      "id": "netbox",
+      "title": "NetBox",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "NetBox is the Network IPAM (IP Address Management) system responsible for maintaining the authoritative network inventory and IP allocation records. It works in conjunction with Shazam to ensure IP assignments are accurately tracked and managed.",
+      "path": "wiki/entities/netbox.md"
+    },
+    {
+      "id": "order-creation-flow",
+      "title": "Order Creation Flow",
+      "silo": "concepts",
+      "type": "concept",
+      "tags": [],
+      "summary": "Order Creation Flow is the step-by-step process executed by the SubmitOrder API to convert a commercial quote into one or more Dynamics Sales Orders. The flow validates contracts, closes sales artifacts, creates accounts, and transforms quote line items into orders.",
+      "path": "wiki/concepts/order-creation-flow.md"
+    },
+    {
+      "id": "participating-systems",
+      "title": "Participating Systems",
+      "silo": "comparisons",
+      "type": "comparison",
+      "tags": [],
+      "summary": "The Business Portal Global Change Order system integrates with multiple backend systems and microservices to provide a cohesive customer experience. Each system plays a distinct role in the order processing pipeline.",
+      "path": "wiki/comparisons/participating-systems.md"
+    },
+    {
+      "id": "portal-authorization-roles",
+      "title": "Portal Authorization & Roles",
+      "silo": "concepts",
+      "type": "concept",
+      "tags": [],
+      "summary": "Portal Authorization & Roles is the access control mechanism that determines which operations customers can perform in the Business Portal based on their assigned role. Role-based permissions enforce business rules and prevent unauthorized modifications to accounts and services.",
+      "path": "wiki/concepts/portal-authorization-roles.md"
+    },
+    {
+      "id": "pricing-logic",
+      "title": "Pricing Logic & Rate Card Comparison",
+      "silo": "concepts",
+      "type": "concept",
+      "tags": [],
+      "summary": "Pricing Logic & Rate Card Comparison is the process by which the Business Portal evaluates the financial impact of customer-initiated service changes. CXPBU OrderMS compares current pricing with the authoritative rate card to determine whether changes are automatically approve...",
+      "path": "wiki/concepts/pricing-logic.md"
+    },
+    {
+      "id": "quote-to-order-transformation",
+      "title": "Quote to Order Transformation",
+      "silo": "concepts",
+      "type": "concept",
+      "tags": [],
+      "summary": "Quote to Order Transformation is the process by which SubmitOrder API converts quote line items (commercial offerings with pricing) into order line items (billable service items) compatible with Dynamics Sales Orders.",
+      "path": "wiki/concepts/quote-to-order-transformation.md"
+    },
+    {
+      "id": "service-level-account-creation",
+      "title": "Service-Level Account Creation",
+      "silo": "concepts",
+      "type": "concept",
+      "tags": [],
+      "summary": "Service-Level Account Creation is the process by which SubmitOrder API creates individual Dynamics accounts for each unique service location (Address ID) identified in a multi-location quote. These accounts represent the service endpoint at that location and serve as the hub f...",
+      "path": "wiki/concepts/service-level-account-creation.md"
+    },
+    {
+      "id": "service-level-changes",
+      "title": "Service Level Changes",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "Service Level Changes are Global Change Orders that affect existing service configurations and pricing. These changes may require sales review depending on pricing impact and contract status.",
+      "path": "wiki/entities/service-level-changes.md"
+    },
+    {
+      "id": "shazam",
+      "title": "Shazam",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "Shazam is the network provisioning system responsible for IP address assignment and network service provisioning. It maintains the authoritative record of IP assignments for customers and coordinates with NetBox for network inventory management.",
+      "path": "wiki/entities/shazam.md"
+    },
+    {
+      "id": "static-ip-change-scenarios",
+      "title": "Static IP Change Scenarios",
+      "silo": "comparisons",
+      "type": "comparison",
+      "tags": [],
+      "summary": "The Business Portal supports 8 distinct static IP change scenarios, each with specific system behavior, automation level, and downtime risk. These scenarios address the major customer needs for IP configuration changes while acknowledging CIDR block technical constraints.",
+      "path": "wiki/comparisons/static-ip-change-scenarios.md"
+    },
+    {
+      "id": "static-ip-changes",
+      "title": "Static IP Changes",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "Static IP Changes enable customers to view their assigned static IP addresses and request modifications through the portal. This category includes both viewing assigned IPs and requesting IP block changes.",
+      "path": "wiki/entities/static-ip-changes.md"
+    },
+    {
+      "id": "static-ip-global-change-orders",
+      "title": "Static IP Global Change Orders",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "Static IP Global Change Orders enable customers to modify their IP configuration (from Dynamic to Static, or between Static block sizes) after service activation. The feature allows BFI and BF Pro customers to adjust their static IP allocation while managing the technical cons...",
+      "path": "wiki/entities/static-ip-global-change-orders.md"
+    },
+    {
+      "id": "static-ip-global-change-orders",
+      "title": "Static IP Global Change Orders - Architecture & Process Documentation",
+      "silo": "sources",
+      "type": "source",
+      "tags": [],
+      "summary": "",
+      "path": "wiki/sources/static-ip-global-change-orders.md"
+    },
+    {
+      "id": "static-ip-products",
+      "title": "Static IP Products",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "Static IP Products are the service offerings provided by Ziply to customers requiring fixed IP address allocation. The two primary products—BFI (Business Fiber Internet) and BF Pro (Business Fiber Pro)—support static IP allocation in two standardized CIDR block sizes.",
+      "path": "wiki/entities/static-ip-products.md"
+    },
+    {
+      "id": "submitorder-api",
+      "title": "SubmitOrder API",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "SubmitOrder API is a microservice API owned by Order MS that converts commercial quotes into Dynamics Sales Orders. The API implements a single-location-per-order model where each unique Address ID in a multi-location quote generates one independent sales order, grouped logica...",
+      "path": "wiki/entities/submitorder-api.md"
+    },
+    {
+      "id": "submitorder-api",
+      "title": "SubmitOrder API - Technical Documentation",
+      "silo": "sources",
+      "type": "source",
+      "tags": [],
+      "summary": "",
+      "path": "wiki/sources/submitorder-api.md"
+    },
+    {
+      "id": "zero-downtime-migration",
+      "title": "Zero Downtime Migration",
+      "silo": "concepts",
+      "type": "concept",
+      "tags": [],
+      "summary": "Zero Downtime Migration is an approach to IP block changes that allows customers to maintain service continuity by temporarily hosting both old and new IP blocks during a transition period. Instead of immediately releasing the old block, customers are given time to update thei...",
+      "path": "wiki/concepts/zero-downtime-migration.md"
+    },
+    {
+      "id": "ziply-notification-platform",
+      "title": "Ziply Notification Platform",
+      "silo": "entities",
+      "type": "entity",
+      "tags": [],
+      "summary": "Ziply Notification Platform is the email notification service for the Business Portal. It will be integrated to send customer notifications for account and service changes triggered through Global Change Orders.",
+      "path": "wiki/entities/ziply-notification-platform.md"
+    }
+  ],
+  "edges": [
+    {
+      "from": "account-level-changes",
+      "to": "change-order-categories",
+      "type": "links-to"
+    },
+    {
+      "from": "account-level-changes",
+      "to": "cxpbu-cadms",
+      "type": "depends-on"
+    },
+    {
+      "from": "account-level-changes",
+      "to": "cxpbu-customerms",
+      "type": "depends-on"
+    },
+    {
+      "from": "account-level-changes",
+      "to": "global-change-order",
+      "type": "part-of"
+    },
+    {
+      "from": "account-level-changes",
+      "to": "global-change-orders",
+      "type": "links-to"
+    },
+    {
+      "from": "business-backend",
+      "to": "commercial-portal",
+      "type": "depends-on"
+    },
+    {
+      "from": "business-backend",
+      "to": "commercial-portal",
+      "type": "part-of"
+    },
+    {
+      "from": "business-backend",
+      "to": "cxpbu-orderms",
+      "type": "depends-on"
+    },
+    {
+      "from": "business-backend",
+      "to": "order-creation-flow",
+      "type": "links-to"
+    },
+    {
+      "from": "business-backend",
+      "to": "submitorder-api",
+      "type": "links-to"
+    },
+    {
+      "from": "change-order-categories",
+      "to": "account-level-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "change-order-categories",
+      "to": "gco-lifecycle",
+      "type": "links-to"
+    },
+    {
+      "from": "change-order-categories",
+      "to": "global-change-order",
+      "type": "related-to"
+    },
+    {
+      "from": "change-order-categories",
+      "to": "service-level-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "change-order-categories",
+      "to": "static-ip-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "cidr-block-allocation",
+      "to": "netbox",
+      "type": "depends-on"
+    },
+    {
+      "from": "cidr-block-allocation",
+      "to": "shazam",
+      "type": "links-to"
+    },
+    {
+      "from": "cidr-block-allocation",
+      "to": "static-ip-global-change-orders",
+      "type": "implements"
+    },
+    {
+      "from": "cidr-block-allocation",
+      "to": "static-ip-products",
+      "type": "links-to"
+    },
+    {
+      "from": "cidr-block-allocation",
+      "to": "zero-downtime-migration",
+      "type": "links-to"
+    },
+    {
+      "from": "commercial-portal",
+      "to": "business-backend",
+      "type": "depends-on"
+    },
+    {
+      "from": "commercial-portal",
+      "to": "global-change-order",
+      "type": "related-to"
+    },
+    {
+      "from": "commercial-portal",
+      "to": "order-creation-flow",
+      "type": "links-to"
+    },
+    {
+      "from": "commercial-portal",
+      "to": "portal-authorization-roles",
+      "type": "implements"
+    },
+    {
+      "from": "commercial-portal",
+      "to": "submitorder-api",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-cadms",
+      "to": "account-level-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-cadms",
+      "to": "cxpbu-customerms",
+      "type": "related-to"
+    },
+    {
+      "from": "cxpbu-cadms",
+      "to": "cxpbu-orderms",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-cadms",
+      "to": "dynamics",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-cadms",
+      "to": "global-change-orders",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-cadms",
+      "to": "participating-systems",
+      "type": "part-of"
+    },
+    {
+      "from": "cxpbu-catalog-db",
+      "to": "cxpbu-orderms",
+      "type": "related-to"
+    },
+    {
+      "from": "cxpbu-catalog-db",
+      "to": "global-change-orders",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-catalog-db",
+      "to": "participating-systems",
+      "type": "part-of"
+    },
+    {
+      "from": "cxpbu-catalog-db",
+      "to": "pricing-logic",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-catalog-db",
+      "to": "service-level-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-customerms",
+      "to": "account-level-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-customerms",
+      "to": "cxpbu-cadms",
+      "type": "related-to"
+    },
+    {
+      "from": "cxpbu-customerms",
+      "to": "cxpbu-orderms",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-customerms",
+      "to": "global-change-orders",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-customerms",
+      "to": "participating-systems",
+      "type": "part-of"
+    },
+    {
+      "from": "cxpbu-orderms",
+      "to": "cxpbu-cadms",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-orderms",
+      "to": "cxpbu-catalog-db",
+      "type": "depends-on"
+    },
+    {
+      "from": "cxpbu-orderms",
+      "to": "cxpbu-customerms",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-orderms",
+      "to": "etf-calculation",
+      "type": "implements"
+    },
+    {
+      "from": "cxpbu-orderms",
+      "to": "global-change-order",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-orderms",
+      "to": "global-change-orders",
+      "type": "links-to"
+    },
+    {
+      "from": "cxpbu-orderms",
+      "to": "participating-systems",
+      "type": "part-of"
+    },
+    {
+      "from": "cxpbu-orderms",
+      "to": "pricing-logic",
+      "type": "implements"
+    },
+    {
+      "from": "dynamics",
+      "to": "cxpbu-orderms",
+      "type": "links-to"
+    },
+    {
+      "from": "dynamics",
+      "to": "gco-lifecycle",
+      "type": "related-to"
+    },
+    {
+      "from": "dynamics",
+      "to": "global-change-order",
+      "type": "links-to"
+    },
+    {
+      "from": "dynamics",
+      "to": "global-change-orders",
+      "type": "links-to"
+    },
+    {
+      "from": "dynamics",
+      "to": "netbox",
+      "type": "links-to"
+    },
+    {
+      "from": "dynamics",
+      "to": "participating-systems",
+      "type": "part-of"
+    },
+    {
+      "from": "dynamics",
+      "to": "shazam",
+      "type": "links-to"
+    },
+    {
+      "from": "etf-calculation",
+      "to": "cxpbu-orderms",
+      "type": "implements"
+    },
+    {
+      "from": "etf-calculation",
+      "to": "global-change-order",
+      "type": "links-to"
+    },
+    {
+      "from": "etf-calculation",
+      "to": "pricing-logic",
+      "type": "links-to"
+    },
+    {
+      "from": "etf-calculation",
+      "to": "service-level-changes",
+      "type": "part-of"
+    },
+    {
+      "from": "gco-lifecycle",
+      "to": "change-order-categories",
+      "type": "links-to"
+    },
+    {
+      "from": "gco-lifecycle",
+      "to": "dynamics",
+      "type": "depends-on"
+    },
+    {
+      "from": "gco-lifecycle",
+      "to": "global-change-order",
+      "type": "implements"
+    },
+    {
+      "from": "gco-lifecycle",
+      "to": "pricing-logic",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-order",
+      "to": "change-order-categories",
+      "type": "related-to"
+    },
+    {
+      "from": "global-change-order",
+      "to": "dynamics",
+      "type": "depends-on"
+    },
+    {
+      "from": "global-change-order",
+      "to": "gco-lifecycle",
+      "type": "implements"
+    },
+    {
+      "from": "global-change-order",
+      "to": "global-change-orders",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-order",
+      "to": "participating-systems",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-order",
+      "to": "pricing-logic",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "account-level-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "change-order-categories",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "cxpbu-cadms",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "cxpbu-customerms",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "cxpbu-orderms",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "dynamics",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "etf-calculation",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "gco-lifecycle",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "global-change-order",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "netbox",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "participating-systems",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "portal-authorization-roles",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "pricing-logic",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "service-level-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "shazam",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "static-ip-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "global-change-orders",
+      "to": "ziply-notification-platform",
+      "type": "links-to"
+    },
+    {
+      "from": "netbox",
+      "to": "dynamics",
+      "type": "links-to"
+    },
+    {
+      "from": "netbox",
+      "to": "global-change-orders",
+      "type": "links-to"
+    },
+    {
+      "from": "netbox",
+      "to": "participating-systems",
+      "type": "part-of"
+    },
+    {
+      "from": "netbox",
+      "to": "shazam",
+      "type": "related-to"
+    },
+    {
+      "from": "netbox",
+      "to": "static-ip-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "order-creation-flow",
+      "to": "commercial-portal",
+      "type": "links-to"
+    },
+    {
+      "from": "order-creation-flow",
+      "to": "dynamics",
+      "type": "depends-on"
+    },
+    {
+      "from": "order-creation-flow",
+      "to": "quote-to-order-transformation",
+      "type": "links-to"
+    },
+    {
+      "from": "order-creation-flow",
+      "to": "service-level-account-creation",
+      "type": "related-to"
+    },
+    {
+      "from": "order-creation-flow",
+      "to": "submitorder-api",
+      "type": "implements"
+    },
+    {
+      "from": "participating-systems",
+      "to": "cxpbu-cadms",
+      "type": "links-to"
+    },
+    {
+      "from": "participating-systems",
+      "to": "cxpbu-customerms",
+      "type": "links-to"
+    },
+    {
+      "from": "participating-systems",
+      "to": "cxpbu-orderms",
+      "type": "links-to"
+    },
+    {
+      "from": "participating-systems",
+      "to": "dynamics",
+      "type": "links-to"
+    },
+    {
+      "from": "participating-systems",
+      "to": "gco-lifecycle",
+      "type": "links-to"
+    },
+    {
+      "from": "participating-systems",
+      "to": "global-change-order",
+      "type": "links-to"
+    },
+    {
+      "from": "portal-authorization-roles",
+      "to": "account-level-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "portal-authorization-roles",
+      "to": "commercial-portal",
+      "type": "part-of"
+    },
+    {
+      "from": "portal-authorization-roles",
+      "to": "global-change-order",
+      "type": "related-to"
+    },
+    {
+      "from": "portal-authorization-roles",
+      "to": "service-level-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "pricing-logic",
+      "to": "cxpbu-catalog-db",
+      "type": "depends-on"
+    },
+    {
+      "from": "pricing-logic",
+      "to": "cxpbu-orderms",
+      "type": "implements"
+    },
+    {
+      "from": "pricing-logic",
+      "to": "etf-calculation",
+      "type": "links-to"
+    },
+    {
+      "from": "pricing-logic",
+      "to": "global-change-order",
+      "type": "links-to"
+    },
+    {
+      "from": "pricing-logic",
+      "to": "service-level-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "quote-to-order-transformation",
+      "to": "cxpbu-orderms",
+      "type": "depends-on"
+    },
+    {
+      "from": "quote-to-order-transformation",
+      "to": "order-creation-flow",
+      "type": "links-to"
+    },
+    {
+      "from": "quote-to-order-transformation",
+      "to": "service-level-account-creation",
+      "type": "links-to"
+    },
+    {
+      "from": "quote-to-order-transformation",
+      "to": "submitorder-api",
+      "type": "implements"
+    },
+    {
+      "from": "service-level-account-creation",
+      "to": "dynamics",
+      "type": "depends-on"
+    },
+    {
+      "from": "service-level-account-creation",
+      "to": "order-creation-flow",
+      "type": "links-to"
+    },
+    {
+      "from": "service-level-account-creation",
+      "to": "quote-to-order-transformation",
+      "type": "links-to"
+    },
+    {
+      "from": "service-level-account-creation",
+      "to": "submitorder-api",
+      "type": "implements"
+    },
+    {
+      "from": "service-level-changes",
+      "to": "change-order-categories",
+      "type": "links-to"
+    },
+    {
+      "from": "service-level-changes",
+      "to": "etf-calculation",
+      "type": "implements"
+    },
+    {
+      "from": "service-level-changes",
+      "to": "global-change-order",
+      "type": "part-of"
+    },
+    {
+      "from": "service-level-changes",
+      "to": "global-change-orders",
+      "type": "links-to"
+    },
+    {
+      "from": "service-level-changes",
+      "to": "pricing-logic",
+      "type": "implements"
+    },
+    {
+      "from": "shazam",
+      "to": "dynamics",
+      "type": "links-to"
+    },
+    {
+      "from": "shazam",
+      "to": "global-change-orders",
+      "type": "links-to"
+    },
+    {
+      "from": "shazam",
+      "to": "netbox",
+      "type": "related-to"
+    },
+    {
+      "from": "shazam",
+      "to": "participating-systems",
+      "type": "part-of"
+    },
+    {
+      "from": "shazam",
+      "to": "static-ip-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-change-scenarios",
+      "to": "cidr-block-allocation",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-change-scenarios",
+      "to": "static-ip-global-change-orders",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-change-scenarios",
+      "to": "static-ip-products",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-change-scenarios",
+      "to": "zero-downtime-migration",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-changes",
+      "to": "change-order-categories",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-changes",
+      "to": "global-change-order",
+      "type": "part-of"
+    },
+    {
+      "from": "static-ip-changes",
+      "to": "netbox",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-changes",
+      "to": "shazam",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-changes",
+      "to": "static-ip-global-change-orders",
+      "type": "related-to"
+    },
+    {
+      "from": "static-ip-global-change-orders",
+      "to": "cidr-block-allocation",
+      "type": "implements"
+    },
+    {
+      "from": "static-ip-global-change-orders",
+      "to": "cidr-block-allocation",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-global-change-orders",
+      "to": "global-change-order",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-global-change-orders",
+      "to": "netbox",
+      "type": "depends-on"
+    },
+    {
+      "from": "static-ip-global-change-orders",
+      "to": "netbox",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-global-change-orders",
+      "to": "shazam",
+      "type": "depends-on"
+    },
+    {
+      "from": "static-ip-global-change-orders",
+      "to": "shazam",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-global-change-orders",
+      "to": "static-ip-change-scenarios",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-global-change-orders",
+      "to": "static-ip-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-global-change-orders",
+      "to": "static-ip-products",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-global-change-orders",
+      "to": "zero-downtime-migration",
+      "type": "implements"
+    },
+    {
+      "from": "static-ip-global-change-orders",
+      "to": "zero-downtime-migration",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-products",
+      "to": "cidr-block-allocation",
+      "type": "related-to"
+    },
+    {
+      "from": "static-ip-products",
+      "to": "static-ip-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "static-ip-products",
+      "to": "static-ip-global-change-orders",
+      "type": "part-of"
+    },
+    {
+      "from": "submitorder-api",
+      "to": "business-backend",
+      "type": "depends-on"
+    },
+    {
+      "from": "submitorder-api",
+      "to": "business-backend",
+      "type": "links-to"
+    },
+    {
+      "from": "submitorder-api",
+      "to": "commercial-portal",
+      "type": "links-to"
+    },
+    {
+      "from": "submitorder-api",
+      "to": "cxpbu-orderms",
+      "type": "links-to"
+    },
+    {
+      "from": "submitorder-api",
+      "to": "cxpbu-orderms",
+      "type": "part-of"
+    },
+    {
+      "from": "submitorder-api",
+      "to": "dynamics",
+      "type": "depends-on"
+    },
+    {
+      "from": "submitorder-api",
+      "to": "dynamics",
+      "type": "links-to"
+    },
+    {
+      "from": "submitorder-api",
+      "to": "order-creation-flow",
+      "type": "implements"
+    },
+    {
+      "from": "submitorder-api",
+      "to": "order-creation-flow",
+      "type": "links-to"
+    },
+    {
+      "from": "submitorder-api",
+      "to": "quote-to-order-transformation",
+      "type": "implements"
+    },
+    {
+      "from": "submitorder-api",
+      "to": "quote-to-order-transformation",
+      "type": "links-to"
+    },
+    {
+      "from": "submitorder-api",
+      "to": "service-level-account-creation",
+      "type": "links-to"
+    },
+    {
+      "from": "zero-downtime-migration",
+      "to": "cidr-block-allocation",
+      "type": "related-to"
+    },
+    {
+      "from": "zero-downtime-migration",
+      "to": "static-ip-change-scenarios",
+      "type": "links-to"
+    },
+    {
+      "from": "zero-downtime-migration",
+      "to": "static-ip-global-change-orders",
+      "type": "implements"
+    },
+    {
+      "from": "ziply-notification-platform",
+      "to": "account-level-changes",
+      "type": "links-to"
+    },
+    {
+      "from": "ziply-notification-platform",
+      "to": "global-change-order",
+      "type": "related-to"
+    },
+    {
+      "from": "ziply-notification-platform",
+      "to": "global-change-orders",
+      "type": "links-to"
+    },
+    {
+      "from": "ziply-notification-platform",
+      "to": "participating-systems",
+      "type": "part-of"
+    },
+    {
+      "from": "ziply-notification-platform",
+      "to": "service-level-changes",
+      "type": "links-to"
+    }
+  ]
+}

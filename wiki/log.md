@@ -14,3 +14,9 @@ Standardized source metadata across all primary sources. Backfilled explicit `##
 (depends-on, implements, part-of, related-to) across all 17 entities and 10 concepts.
 Annotated claim provenance across all facts. Fixed .gitignore to track markdown knowledge documents.
 Passed deterministic linter with 0 errors and 0 warnings.
+
+## [2026-10-21] init | Knowledge graph manifest and semantic index engines established
+Implemented deterministic Knowledge Graph compiler (`scripts/build-graph.py`) producing `wiki/graph.json`
+with typed directed edges and orphan detection. Implemented local semantic and keyword index compiler
+(`scripts/build-semantic-index.py`) producing `wiki/semantic-index.json`. Integrated graph connectivity
+and index verification into `scripts/lint-wiki.py`. Updated progressive disclosure query workflow.

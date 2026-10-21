@@ -52,6 +52,7 @@ raw/archive/*
 wiki/*
 !wiki/.gitkeep
 !wiki/*.md
+!wiki/*.json
 
 # Allow subdirectories so git can inspect their contents
 !wiki/comparisons/

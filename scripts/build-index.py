@@ -16,6 +16,7 @@ Usage:
 import sys
 import re
 import argparse
+import json
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 
@@ -348,6 +349,35 @@ def build_all_indexes(check_only: bool = False, force_mode: Optional[str] = None
         file_path.write_text(content, encoding="utf-8")
         written += 1
         print(f"  [OK] Generated {file_path.relative_to(REPO_ROOT)}")
+
+    # Automatically synchronize graph.json and semantic-index.json if compilers exist
+    graph_compiler = REPO_ROOT / "scripts" / "build-graph.py"
+    if graph_compiler.exists():
+        try:
+            import importlib
+            bg_mod = importlib.import_module("build-graph")
+            graph_data = bg_mod.generate_graph(WIKI_DIR)
+            (WIKI_DIR / "graph.json").write_text(
+                json.dumps(graph_data, indent=2, ensure_ascii=False) + "\n",
+                encoding="utf-8"
+            )
+            print("  [OK] Generated wiki/graph.json")
+        except Exception as e:
+            print(f"  [WARN] Failed to compile graph.json: {e}")
+
+    semantic_compiler = REPO_ROOT / "scripts" / "build-semantic-index.py"
+    if semantic_compiler.exists():
+        try:
+            import importlib
+            bs_mod = importlib.import_module("build-semantic-index")
+            sem_data = bs_mod.generate_semantic_index(WIKI_DIR)
+            (WIKI_DIR / "semantic-index.json").write_text(
+                json.dumps(sem_data, indent=2, ensure_ascii=False) + "\n",
+                encoding="utf-8"
+            )
+            print("  [OK] Generated wiki/semantic-index.json")
+        except Exception as e:
+            print(f"  [WARN] Failed to compile semantic-index.json: {e}")
 
     print(f"\n[SUCCESS] Successfully compiled {written} indexes ({total_pages} knowledge pages indexed).")
     print(f"Mode: {'Hierarchical (Progressive Disclosure)' if hierarchical else 'Flat/Hybrid'}")
