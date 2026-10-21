@@ -20,3 +20,9 @@ Implemented deterministic Knowledge Graph compiler (`scripts/build-graph.py`) pr
 with typed directed edges and orphan detection. Implemented local semantic and keyword index compiler
 (`scripts/build-semantic-index.py`) producing `wiki/semantic-index.json`. Integrated graph connectivity
 and index verification into `scripts/lint-wiki.py`. Updated progressive disclosure query workflow.
+
+## [2026-10-21] init | Multi-LLM instruction adapters and sync engine established
+Implemented deterministic instruction adapter synchronizer (`scripts/sync-adapters.py`).
+Configured dedicated environment adapters for Claude Code (`CLAUDE.md`), Google Antigravity & Gemini
+(`.gemini/GEMINI.md`), and Cursor IDE (`.cursorrules`, `.cursor/rules/wiki.mdc`).
+Integrated adapter validation and drift detection into `scripts/lint-wiki.py`.

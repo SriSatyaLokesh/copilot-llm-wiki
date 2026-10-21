@@ -28,7 +28,8 @@ scratch.*
 # The .planning folder is part of the implementation history; ignore it for templates.
 
 # LLM Agent configurations (local state)
-.gemini/
+.gemini/*
+!.gemini/GEMINI.md
 .claude/
 .agent/
 dist/
@@ -36,8 +37,8 @@ dist/
 # Personal rule files (if any)
 PROJECT_RULES.md
 SUPERPOWER-STYLE.md
-CLAUDE.md
-adapters/GEMINI.md
+
+
 
 # --- PROTECTED REPO STRUCTURE ---
 
