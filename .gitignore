@@ -48,7 +48,7 @@ raw/*
 raw/archive/*
 !raw/archive/.gitkeep
 
-# 🧠 WIKI DIRECTORY: Ignore content except the skeletal framework
+# 🧠 WIKI DIRECTORY: Track all markdown knowledge files in wiki/
 wiki/*
 !wiki/.gitkeep
 !wiki/*.md
@@ -62,34 +62,36 @@ wiki/*
 !wiki/archive/
 !wiki/meta/
 
-# Subdirectory ignore rules (only track structural placeholders & sub-indexes)
+# Track all markdown files and structural placeholders in silos
 wiki/comparisons/*
 !wiki/comparisons/.gitkeep
-!wiki/comparisons/index.md
+!wiki/comparisons/*.md
 
 wiki/concepts/*
 !wiki/concepts/.gitkeep
-!wiki/concepts/index.md
+!wiki/concepts/*.md
 
 wiki/entities/*
 !wiki/entities/.gitkeep
-!wiki/entities/index.md
+!wiki/entities/*.md
 
 wiki/qa/*
 !wiki/qa/.gitkeep
-!wiki/qa/index.md
+!wiki/qa/*.md
 
 wiki/sources/*
 !wiki/sources/.gitkeep
-!wiki/sources/index.md
+!wiki/sources/*.md
 
 wiki/archive/*
 !wiki/archive/*/
 !wiki/archive/.gitkeep
-!wiki/archive/index.md
+!wiki/archive/*.md
 wiki/archive/*/*
 !wiki/archive/*/.gitkeep
+!wiki/archive/*/*.md
 
 wiki/meta/*
 !wiki/meta/.gitkeep
-!wiki/meta/snapshots.md
+!wiki/meta/*.md
+!wiki/meta/*.json
