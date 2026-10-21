@@ -13,6 +13,8 @@ copilot-llm-wiki/
     ├── index.md
     ├── log.md
     ├── overview.md
+    ├── graph.json          ← auto-generated knowledge graph manifest (nodes & edges)
+    ├── semantic-index.json ← dense local keyword & candidate retrieval index
     ├── entities/
     ├── concepts/
     ├── comparisons/
@@ -153,7 +155,7 @@ Triggered by: "reingest X", "update X in the wiki", "refresh X"
 
 Triggered by: any question about Copilot
 
-1. Read `index.md` to find relevant pages.
+1. Routing: Consult `wiki/semantic-index.json` or `wiki/index.md` to locate candidate notes and traverse explicit edges in `wiki/graph.json` without scanning irrelevant files.
 2. Read those pages; follow cross-links as needed.
 3. If the wiki can't answer, say which source would fill the gap and ask whether to ingest it.
 4. Answer with citations: list the pages consulted at the end.

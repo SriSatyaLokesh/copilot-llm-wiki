@@ -136,6 +136,38 @@ def lint_wiki(strict: bool = False) -> int:
         else:
             print("  [OK] Index Synchronization: All sub-indexes and root index up-to-date")
 
+    # 1b. Knowledge Graph & Semantic Index Synchronization
+    build_graph_script = REPO_ROOT / "scripts" / "build-graph.py"
+    if build_graph_script.exists():
+        res = subprocess.run([sys.executable, str(build_graph_script), "--check"], capture_output=True, text=True)
+        if res.returncode != 0:
+            errors.append(f"Knowledge Graph: wiki/graph.json is out of sync.\n{res.stdout.strip()}")
+        else:
+            print("  [OK] Knowledge Graph: wiki/graph.json is up-to-date")
+
+        try:
+            import importlib
+            if str(REPO_ROOT / "scripts") not in sys.path:
+                sys.path.insert(0, str(REPO_ROOT / "scripts"))
+            bg_mod = importlib.import_module("build-graph")
+            graph_data = bg_mod.generate_graph(WIKI_DIR)
+            orphans = bg_mod.find_isolated_nodes(graph_data)
+            if orphans:
+                for o in orphans:
+                    warnings.append(f"Graph Orphan: Node '{o}' has 0 inbound and 0 outbound relationships/links")
+            else:
+                print("  [OK] Knowledge Graph: 0 isolated orphan nodes detected")
+        except Exception as e:
+            warnings.append(f"Could not perform graph orphan analysis: {e}")
+
+    build_semantic_script = REPO_ROOT / "scripts" / "build-semantic-index.py"
+    if build_semantic_script.exists():
+        res = subprocess.run([sys.executable, str(build_semantic_script), "--check"], capture_output=True, text=True)
+        if res.returncode != 0:
+            errors.append(f"Semantic Index: wiki/semantic-index.json is out of sync.\n{res.stdout.strip()}")
+        else:
+            print("  [OK] Semantic Index: wiki/semantic-index.json is up-to-date")
+
     # 2. Source Freshness check
     if SOURCES_DIR.exists():
         source_files = [f for f in SOURCES_DIR.glob("*.md") if f.name not in EXCLUDED_FILENAMES]
