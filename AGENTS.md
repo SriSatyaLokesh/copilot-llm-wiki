@@ -123,7 +123,7 @@ Read entities/copilot-chat.md, comparisons/ide-support.md. Filed answer as wiki/
 
 Triggered by: "ingest X", "add X to the wiki", "process this", "add this source"
 
-1. **Read the source** in full. If it's a URL, save the content to `raw/<slug>.md` first.
+1. **Intake and Normalization**: Run `python scripts/intake.py <source>` to normalize the input (URL, PDF, CSV, GitHub issue) into `raw/<slug>.md`. Read the raw file in full.
 2. **State key takeaways** before writing anything: important facts, new entities/concepts to create, existing pages to update.
 3. **Contradiction check.** Read any existing pages the source touches. If a claim contradicts an existing page, flag it to the user and do not write until resolved.
 4. **Write a source summary** at `wiki/sources/<slug>.md` — key takeaways, notable details, cross-links to pages created or updated.
